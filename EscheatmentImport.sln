@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.32802.440
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{159641D6-6404-4A2A-AE62-294DE0FE8301}") = "EscheatmentImport", "EscheatmentImport\EscheatmentImport.dtproj", "{1EE1633E-5C44-4C8B-A40F-346B92BE7C66}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Development|Default = Development|Default
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1EE1633E-5C44-4C8B-A40F-346B92BE7C66}.Development|Default.ActiveCfg = Development
+		{1EE1633E-5C44-4C8B-A40F-346B92BE7C66}.Development|Default.Build.0 = Development
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {832FEB11-745F-406E-A990-4673E3350722}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,2682 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="11/28/2022 2:44:52 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="RAYMONDMERCKEL"
+  DTS:CreatorName="ACI\rmerckel"
+  DTS:DTSID="{0F49C884-4811-4A55-BDF0-E7E1CE53C30E}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="15.0.2000.180"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="Package"
+  DTS:PackageType="5"
+  DTS:VersionBuild="71"
+  DTS:VersionGUID="{2482A3F5-A784-4505-A77B-36B252856149}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[acisql2012.ACIrobot]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{2483A934-3461-4BF4-B40E-60BD135A4A8F}"
+      DTS:ObjectName="acisql2012.ACIrobot">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=acisql2012;Initial Catalog=ACIrobot;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[AL escheatment - log QL notes.xls_2022_11_29_18_22_09.csv]"
+      DTS:CreationName="FILE"
+      DTS:DTSID="{CA39FE21-0FDD-4720-99A9-4FAE3A79E25D}"
+      DTS:ObjectName="AL escheatment - log QL notes.xls_2022_11_29_18_22_09.csv">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="L:\Escheatment\Test\AL escheatment - log QL notes.xls_2022_11_29_18_22_09.csv" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Archive]"
+      DTS:CreationName="FILE"
+      DTS:DTSID="{9B371352-2D45-4B8C-9D9F-43900F95DE98}"
+      DTS:ObjectName="Archive">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:FileUsageType="2"
+          DTS:ConnectionString="L:\Escheatment\Archive" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[DBConn]"
+      DTS:CreationName="ADO.NET:System.Data.SqlClient.SqlConnection, System.Data, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+      DTS:DTSID="{BBE3906E-90B6-4FF3-A092-0AF83D280ABD}"
+      DTS:ObjectName="DBConn">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=acisql2012;Initial Catalog=ACIrobot;Integrated Security=True;Application Name=SSIS-Package-{BBE3906E-90B6-4FF3-A092-0AF83D280ABD}acisql2012.ACIrobot1;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Destination file Conn]"
+      DTS:CreationName="FLATFILE"
+      DTS:DTSID="{3D21A2B6-0B80-4CFE-828A-FDEEB7E6BF80}"
+      DTS:ObjectName="Destination file Conn">
+      <DTS:PropertyExpression
+        DTS:Name="ConnectionString">@[User::FileName] + "_"+ (DT_STR,4,1252)DATEPART( "yyyy" , @[System::StartTime]   ) + "_"+
+RIGHT("0" + (DT_STR,4,1252)DATEPART( "mm" ,  @[System::StartTime]  ), 2)  + "_"+
+RIGHT("0" + (DT_STR,4,1252)DATEPART( "dd" , @[System::StartTime]   ), 2)  + "_"+
+RIGHT("0" + (DT_STR,4,1252)DATEPART( "hh" , @[System::StartTime]   ), 2)  + "_"+
+RIGHT("0" + (DT_STR,4,1252)DATEPART( "mi" ,  @[System::StartTime]  ), 2)  + "_"+
+RIGHT("0" + (DT_STR,4,1252)DATEPART( "ss" , @[System::StartTime]   ), 2) + ".csv"</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:Format="Delimited"
+          DTS:LocaleID="1033"
+          DTS:HeaderRowDelimiter="_x000D__x000A_"
+          DTS:ColumnNamesInFirstDataRow="True"
+          DTS:RowDelimiter=""
+          DTS:TextQualifier="_x003C_none_x003E_"
+          DTS:CodePage="1252"
+          DTS:ConnectionString="_2022_12_01_09_43_22.csv">
+          <DTS:FlatFileColumns>
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="3"
+              DTS:TextQualified="True"
+              DTS:ObjectName="ID"
+              DTS:DTSID="{5EBE81DA-8B47-4C5E-9739-93FD6F8F8AC4}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="25"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="CheckNumber"
+              DTS:DTSID="{09C61D0A-F5DA-4289-B748-68BF607712D1}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="55"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Payee"
+              DTS:DTSID="{E6D55343-5AFC-4703-8DB8-76AAB3F1A35D}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="15"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="CheckDate"
+              DTS:DTSID="{9A9311C6-883F-4CBE-8F7C-B55238189886}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="10"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="CheckAmount"
+              DTS:DTSID="{7EE25228-D4E7-453D-9E17-01E6D76DB448}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="15"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="ClaimNumber"
+              DTS:DTSID="{93589E8E-3DC3-45A0-84CB-35F64DCE46AA}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="55"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="CheckAddress1"
+              DTS:DTSID="{76251F31-5AC0-4FB8-A08C-20C067B5C6A9}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="55"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="CheckAddress2"
+              DTS:DTSID="{0B6A43AD-63F9-4B73-96A2-0F1684597C69}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="CheckCity"
+              DTS:DTSID="{20F704FA-3FA7-42B1-BBE2-D2632F64F632}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="2"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="CheckState"
+              DTS:DTSID="{FB43CB85-1CA4-4EAF-A0D4-83EB2509AF70}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="10"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="CheckZip"
+              DTS:DTSID="{83BF6DDC-E28A-4F74-BE0E-A8BBE66F8C69}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="150"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="QLNotes"
+              DTS:DTSID="{BD29BABE-C9B8-4316-889E-BAE4B307A473}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x000D__x000A_"
+              DTS:DataType="133"
+              DTS:TextQualified="True"
+              DTS:ObjectName="RecordCreateDate"
+              DTS:DTSID="{C4B87084-0A97-4029-B6FA-64838DEC3F5F}"
+              DTS:CreationName="" />
+          </DTS:FlatFileColumns>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Excel Connection Manager]"
+      DTS:CreationName="EXCEL"
+      DTS:DTSID="{93B7BAE6-A196-4226-A00D-EC5E2CCF7E2C}"
+      DTS:ObjectName="Excel Connection Manager">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="0"
+          DTS:ConnectRetryInterval="0"
+          DTS:ConnectionString="Provider=Microsoft.Jet.OLEDB.4.0;Data Source=L:\Escheatment\Test\AL escheatment - log QL notes.xls;Extended Properties=&quot;EXCEL 8.0;HDR=YES&quot;;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Test]"
+      DTS:CreationName="FILE"
+      DTS:DTSID="{B71D5B58-DE4E-4158-8011-1296A1996818}"
+      DTS:ObjectName="Test">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:FileUsageType="2"
+          DTS:ConnectionString="L:\Escheatment\Test" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{A6F04DDB-B2A2-4B9E-91DF-9A86507216DB}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="ArchiveLocation">
+      <DTS:VariableValue
+        DTS:DataType="8">L:\Escheatment\Archive</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{E7AAF947-318A-4874-9387-FF4CD80022EE}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="CSVFileName">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{83725E4B-14F5-4630-8A6F-7B55A0B0E861}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="ErrorFileName">
+      <DTS:VariableValue
+        DTS:DataType="8">Error</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{53B3593F-6D32-4DA7-8AEB-F61ACFFD33AF}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="&quot;\\\\acifs2\\Escheatment\\Archive\\&quot;"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="ExcelArchiveFolderPath">
+      <DTS:VariableValue
+        DTS:DataType="8">\\acifs2\Escheatment\Archive\</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{085E9FE6-8C4D-439B-A062-CE78FB36C85D}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="&quot;\\\\acifs2\\Escheatment\\Errors\\&quot;"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="ExcelErrorFolder">
+      <DTS:VariableValue
+        DTS:DataType="8">\\acifs2\Escheatment\Errors\</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{77A1E6A5-8953-4E11-B682-1BC97ACE8E59}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="&quot;\\\\acifs2\\Escheatment\\Test\\&quot;"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="ExcelImportFolderPath">
+      <DTS:VariableValue
+        DTS:DataType="8">\\acifs2\Escheatment\Test\</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{492479B0-CD3E-48C7-9F46-60206871B6C9}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="&quot;\\\\acifs2\\Escheatment\\Processing\\&quot;"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="ExcelProcessFolderPath">
+      <DTS:VariableValue
+        DTS:DataType="8">\\acifs2\Escheatment\Processing\</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{EC5EAABC-F53D-4A50-BCD9-6C5E135D8A8D}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="FileName">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{8AA64198-7224-4CF7-9C33-2DE556FA5DB8}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="FileSpec">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{4CFB7F71-4E49-4D69-8055-76418E2CA8B9}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="ProdFilesFolder">
+      <DTS:VariableValue
+        DTS:DataType="8">L:\Escheatment\Test</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{F5AB2137-D6B7-4C53-A831-0DA7D108F729}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="SheetName">
+      <DTS:VariableValue
+        DTS:DataType="8">Sheet1</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{6FB0C656-987B-425E-9703-CE3A32C3B553}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="SourceFileName">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{0F474316-1654-4978-A13D-6E7415C4D2C2}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="SourceFileNameNoExt">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{7F46C58C-6955-4CFB-BFEB-17444937976F}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="TableName">
+      <DTS:VariableValue
+        DTS:DataType="8">dbo.Enr_Stage_Data</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Copy Files to Archive"
+      DTS:CreationName="Microsoft.FileSystemTask"
+      DTS:DelayValidation="True"
+      DTS:Description="File System Task"
+      DTS:DTSID="{CAA820C2-617F-43A1-8955-F1CC0781F1B6}"
+      DTS:ExecutableType="Microsoft.FileSystemTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Copy Files to Archive"
+      DTS:TaskContact="File System Task;Microsoft Corporation; SQL Server 2019; © 2019 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <FileSystemData
+          TaskOperationType="CopyDirectory"
+          TaskOverwriteDestFile="True"
+          TaskSourcePath="User::ProdFilesFolder"
+          TaskIsSourceVariable="True"
+          TaskDestinationPath="User::ArchiveLocation"
+          TaskIsDestinationVariable="True" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Create File Name"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{87D60E5B-D001-4BA2-BAF5-73AB3E0E0E30}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Create File Name"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2019; © 2019 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{2483A934-3461-4BF4-B40E-60BD135A4A8F}"
+          SQLTask:SqlStatementSource="Declare @FileDate  datetime&#xA;Declare @FileSpec  varchar(255)&#xA;Set @FileDate = DATEADD(day, -1, getdate())&#xA;Set @FileSpec = 'Intl_Output_' + CAST(YEAR(@FileDate) as varchar(20)) + '_' + CAST(MONTH(@FileDate) as varchar(2)) + '_' + CAST(DAY(@FileDate) as varchar(2)) + '_*.xls'&#xA;Select @FileSpec as FileSpec"
+          SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ResultBinding
+            SQLTask:ResultName="FileSpec"
+            SQLTask:DtsVariableName="User::FileSpec" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Delete records older than 30 days"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{8DC060B9-C312-4CF3-9706-FFFB5929E2B7}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Delete records older than 30 days"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2019; © 2019 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{2483A934-3461-4BF4-B40E-60BD135A4A8F}"
+          SQLTask:SqlStatementSource="DELETE FROM [Enr_Stage_Data]&#xA;  WHERE [RecordCreateDate] &lt; DATEADD(day, -30, GETDATE())" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Read Each Excel File to Database"
+      DTS:CreationName="STOCK:FOREACHLOOP"
+      DTS:Description="Foreach Loop Container"
+      DTS:DTSID="{C99ABE83-C896-42E1-AB16-564A014BE400}"
+      DTS:ExecutableType="STOCK:FOREACHLOOP"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Read Each Excel File to Database">
+      <DTS:ForEachEnumerator
+        DTS:CreationName="Microsoft.ForEachFileEnumerator"
+        DTS:DTSID="{540B68A6-B186-41E5-A213-C3999334D041}"
+        DTS:ObjectName="{540B68A6-B186-41E5-A213-C3999334D041}">
+        <DTS:ObjectData>
+          <ForEachFileEnumeratorProperties>
+            <FEFEProperty
+              Folder="L:\Escheatment\Test" />
+            <FEFEProperty
+              FileSpec="*.xls" />
+            <FEFEProperty
+              FileNameRetrievalType="0" />
+            <FEFEProperty
+              Recurse="0" />
+          </ForEachFileEnumeratorProperties>
+        </DTS:ObjectData>
+      </DTS:ForEachEnumerator>
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Read Each Excel File to Database\Import Escheatment"
+          DTS:CreationName="Microsoft.Pipeline"
+          DTS:DelayValidation="True"
+          DTS:Description="Data Flow Task"
+          DTS:DTSID="{F5A7C6BE-BA78-45F4-8E83-72CFB240246D}"
+          DTS:ExecutableType="Microsoft.Pipeline"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Import Escheatment"
+          DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <pipeline
+              version="1">
+              <components>
+                <component
+                  refId="Package\Read Each Excel File to Database\Import Escheatment\Data Conversion"
+                  componentClassID="Microsoft.DataConvert"
+                  contactInfo="Data Conversion;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+                  description="Data Conversion"
+                  name="Data Conversion"
+                  usesDispositions="true">
+                  <inputs>
+                    <input
+                      refId="Package\Read Each Excel File to Database\Import Escheatment\Data Conversion.Inputs[Data Conversion Input]"
+                      name="Data Conversion Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Read Each Excel File to Database\Import Escheatment\Data Conversion.Inputs[Data Conversion Input].Columns[Check #]"
+                          cachedDataType="r8"
+                          cachedName="Check #"
+                          lineageId="Package\Read Each Excel File to Database\Import Escheatment\Excel Source.Outputs[Excel Source Output].Columns[Check #]" />
+                        <inputColumn
+                          refId="Package\Read Each Excel File to Database\Import Escheatment\Data Conversion.Inputs[Data Conversion Input].Columns[Payee]"
+                          cachedDataType="wstr"
+                          cachedLength="255"
+                          cachedName="Payee"
+                          lineageId="Package\Read Each Excel File to Database\Import Escheatment\Excel Source.Outputs[Excel Source Output].Columns[Payee]" />
+                        <inputColumn
+                          refId="Package\Read Each Excel File to Database\Import Escheatment\Data Conversion.Inputs[Data Conversion Input].Columns[Check Date]"
+                          cachedDataType="date"
+                          cachedName="Check Date"
+                          lineageId="Package\Read Each Excel File to Database\Import Escheatment\Excel Source.Outputs[Excel Source Output].Columns[Check Date]" />
+                        <inputColumn
+                          refId="Package\Read Each Excel File to Database\Import Escheatment\Data Conversion.Inputs[Data Conversion Input].Columns[Check Amount]"
+                          cachedDataType="cy"
+                          cachedName="Check Amount"
+                          lineageId="Package\Read Each Excel File to Database\Import Escheatment\Excel Source.Outputs[Excel Source Output].Columns[Check Amount]" />
+                        <inputColumn
+                          refId="Package\Read Each Excel File to Database\Import Escheatment\Data Conversion.Inputs[Data Conversion Input].Columns[Claim Number]"
+                          cachedDataType="wstr"
+                          cachedLength="255"
+                          cachedName="Claim Number"
+                          lineageId="Package\Read Each Excel File to Database\Import Escheatment\Excel Source.Outputs[Excel Source Output].Columns[Claim Number]" />
+                        <inputColumn
+                          refId="Package\Read Each Excel File to Database\Import Escheatment\Data Conversion.Inputs[Data Conversion Input].Columns[Check Address 1]"
+                          cachedDataType="wstr"
+                          cachedLength="255"
+                          cachedName="Check Address 1"
+                          lineageId="Package\Read Each Excel File to Database\Import Escheatment\Excel Source.Outputs[Excel Source Output].Columns[Check Address 1]" />
+                        <inputColumn
+                          refId="Package\Read Each Excel File to Database\Import Escheatment\Data Conversion.Inputs[Data Conversion Input].Columns[Check Address 2]"
+                          cachedDataType="wstr"
+                          cachedLength="255"
+                          cachedName="Check Address 2"
+                          lineageId="Package\Read Each Excel File to Database\Import Escheatment\Excel Source.Outputs[Excel Source Output].Columns[Check Address 2]" />
+                        <inputColumn
+                          refId="Package\Read Each Excel File to Database\Import Escheatment\Data Conversion.Inputs[Data Conversion Input].Columns[Check City]"
+                          cachedDataType="wstr"
+                          cachedLength="255"
+                          cachedName="Check City"
+                          lineageId="Package\Read Each Excel File to Database\Import Escheatment\Excel Source.Outputs[Excel Source Output].Columns[Check City]" />
+                        <inputColumn
+                          refId="Package\Read Each Excel File to Database\Import Escheatment\Data Conversion.Inputs[Data Conversion Input].Columns[Check State]"
+                          cachedDataType="wstr"
+                          cachedLength="255"
+                          cachedName="Check State"
+                          lineageId="Package\Read Each Excel File to Database\Import Escheatment\Excel Source.Outputs[Excel Source Output].Columns[Check State]" />
+                        <inputColumn
+                          refId="Package\Read Each Excel File to Database\Import Escheatment\Data Conversion.Inputs[Data Conversion Input].Columns[Check Zip]"
+                          cachedDataType="wstr"
+                          cachedLength="255"
+                          cachedName="Check Zip"
+                          lineageId="Package\Read Each Excel File to Database\Import Escheatment\Excel Source.Outputs[Excel Source Output].Columns[Check Zip]" />
+                        <inputColumn
+                          refId="Package\Read Each Excel File to Database\Import Escheatment\Data Conversion.Inputs[Data Conversion Input].Columns[QL Notes]"
+                          cachedDataType="wstr"
+                          cachedLength="255"
+                          cachedName="QL Notes"
+                          lineageId="Package\Read Each Excel File to Database\Import Escheatment\Excel Source.Outputs[Excel Source Output].Columns[QL Notes]" />
+                        <inputColumn
+                          refId="Package\Read Each Excel File to Database\Import Escheatment\Data Conversion.Inputs[Data Conversion Input].Columns[DATE QL NOTES ENTERED:]"
+                          cachedDataType="wstr"
+                          cachedLength="255"
+                          cachedName="DATE QL NOTES ENTERED:"
+                          lineageId="Package\Read Each Excel File to Database\Import Escheatment\Excel Source.Outputs[Excel Source Output].Columns[DATE QL NOTES ENTERED:]" />
+                      </inputColumns>
+                      <externalMetadataColumns />
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Read Each Excel File to Database\Import Escheatment\Data Conversion.Outputs[Data Conversion Output]"
+                      exclusionGroup="1"
+                      name="Data Conversion Output"
+                      synchronousInputId="Package\Read Each Excel File to Database\Import Escheatment\Data Conversion.Inputs[Data Conversion Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Read Each Excel File to Database\Import Escheatment\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of Check #]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          length="25"
+                          lineageId="Package\Read Each Excel File to Database\Import Escheatment\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of Check #]"
+                          name="Copy of Check #"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Specifies the input column used as the source of data for the conversion."
+                              name="SourceInputColumnLineageID">#{Package\Read Each Excel File to Database\Import Escheatment\Excel Source.Outputs[Excel Source Output].Columns[Check #]}</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Read Each Excel File to Database\Import Escheatment\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of Payee]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          length="55"
+                          lineageId="Package\Read Each Excel File to Database\Import Escheatment\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of Payee]"
+                          name="Copy of Payee"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Specifies the input column used as the source of data for the conversion."
+                              name="SourceInputColumnLineageID">#{Package\Read Each Excel File to Database\Import Escheatment\Excel Source.Outputs[Excel Source Output].Columns[Payee]}</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Read Each Excel File to Database\Import Escheatment\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of Check Date]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          length="15"
+                          lineageId="Package\Read Each Excel File to Database\Import Escheatment\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of Check Date]"
+                          name="Copy of Check Date"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Specifies the input column used as the source of data for the conversion."
+                              name="SourceInputColumnLineageID">#{Package\Read Each Excel File to Database\Import Escheatment\Excel Source.Outputs[Excel Source Output].Columns[Check Date]}</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Read Each Excel File to Database\Import Escheatment\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of Check Amount]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          length="10"
+                          lineageId="Package\Read Each Excel File to Database\Import Escheatment\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of Check Amount]"
+                          name="Copy of Check Amount"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Specifies the input column used as the source of data for the conversion."
+                              name="SourceInputColumnLineageID">#{Package\Read Each Excel File to Database\Import Escheatment\Excel Source.Outputs[Excel Source Output].Columns[Check Amount]}</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Read Each Excel File to Database\Import Escheatment\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of Claim Number]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          length="15"
+                          lineageId="Package\Read Each Excel File to Database\Import Escheatment\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of Claim Number]"
+                          name="Copy of Claim Number"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Specifies the input column used as the source of data for the conversion."
+                              name="SourceInputColumnLineageID">#{Package\Read Each Excel File to Database\Import Escheatment\Excel Source.Outputs[Excel Source Output].Columns[Claim Number]}</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Read Each Excel File to Database\Import Escheatment\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of Check Address 1]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          length="55"
+                          lineageId="Package\Read Each Excel File to Database\Import Escheatment\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of Check Address 1]"
+                          name="Copy of Check Address 1"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Specifies the input column used as the source of data for the conversion."
+                              name="SourceInputColumnLineageID">#{Package\Read Each Excel File to Database\Import Escheatment\Excel Source.Outputs[Excel Source Output].Columns[Check Address 1]}</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Read Each Excel File to Database\Import Escheatment\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of Check Address 2]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          length="55"
+                          lineageId="Package\Read Each Excel File to Database\Import Escheatment\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of Check Address 2]"
+                          name="Copy of Check Address 2"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Specifies the input column used as the source of data for the conversion."
+                              name="SourceInputColumnLineageID">#{Package\Read Each Excel File to Database\Import Escheatment\Excel Source.Outputs[Excel Source Output].Columns[Check Address 2]}</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Read Each Excel File to Database\Import Escheatment\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of Check City]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          length="50"
+                          lineageId="Package\Read Each Excel File to Database\Import Escheatment\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of Check City]"
+                          name="Copy of Check City"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Specifies the input column used as the source of data for the conversion."
+                              name="SourceInputColumnLineageID">#{Package\Read Each Excel File to Database\Import Escheatment\Excel Source.Outputs[Excel Source Output].Columns[Check City]}</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Read Each Excel File to Database\Import Escheatment\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of Check State]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          length="2"
+                          lineageId="Package\Read Each Excel File to Database\Import Escheatment\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of Check State]"
+                          name="Copy of Check State"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Specifies the input column used as the source of data for the conversion."
+                              name="SourceInputColumnLineageID">#{Package\Read Each Excel File to Database\Import Escheatment\Excel Source.Outputs[Excel Source Output].Columns[Check State]}</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Read Each Excel File to Database\Import Escheatment\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of Check Zip]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          length="10"
+                          lineageId="Package\Read Each Excel File to Database\Import Escheatment\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of Check Zip]"
+                          name="Copy of Check Zip"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Specifies the input column used as the source of data for the conversion."
+                              name="SourceInputColumnLineageID">#{Package\Read Each Excel File to Database\Import Escheatment\Excel Source.Outputs[Excel Source Output].Columns[Check Zip]}</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Read Each Excel File to Database\Import Escheatment\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of QL Notes]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          length="150"
+                          lineageId="Package\Read Each Excel File to Database\Import Escheatment\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of QL Notes]"
+                          name="Copy of QL Notes"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Specifies the input column used as the source of data for the conversion."
+                              name="SourceInputColumnLineageID">#{Package\Read Each Excel File to Database\Import Escheatment\Excel Source.Outputs[Excel Source Output].Columns[QL Notes]}</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Read Each Excel File to Database\Import Escheatment\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of DATE QL NOTES ENTERED:]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          length="255"
+                          lineageId="Package\Read Each Excel File to Database\Import Escheatment\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of DATE QL NOTES ENTERED:]"
+                          name="Copy of DATE QL NOTES ENTERED:"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Specifies the input column used as the source of data for the conversion."
+                              name="SourceInputColumnLineageID">#{Package\Read Each Excel File to Database\Import Escheatment\Excel Source.Outputs[Excel Source Output].Columns[DATE QL NOTES ENTERED:]}</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                          </properties>
+                        </outputColumn>
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                    <output
+                      refId="Package\Read Each Excel File to Database\Import Escheatment\Data Conversion.Outputs[Data Conversion Error Output]"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="Data Conversion Error Output"
+                      synchronousInputId="Package\Read Each Excel File to Database\Import Escheatment\Data Conversion.Inputs[Data Conversion Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Read Each Excel File to Database\Import Escheatment\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Read Each Excel File to Database\Import Escheatment\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Read Each Excel File to Database\Import Escheatment\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Read Each Excel File to Database\Import Escheatment\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Read Each Excel File to Database\Import Escheatment\Excel Source"
+                  componentClassID="Microsoft.ExcelSource"
+                  contactInfo="Excel Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+                  description="Excel Source"
+                  name="Excel Source"
+                  usesDispositions="true"
+                  version="1">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset">Sheet1$</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                    <property
+                      dataType="System.String"
+                      description="The variable that contains the SQL command to be executed."
+                      name="SqlCommandVariable"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">0</property>
+                    <property
+                      dataType="System.String"
+                      description="The mapping from parameters in the SQL command to variables."
+                      name="ParameterMapping"></property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Read Each Excel File to Database\Import Escheatment\Excel Source.Connections[OleDbConnection]"
+                      connectionManagerID="Package.ConnectionManagers[Excel Connection Manager]"
+                      connectionManagerRefId="Package.ConnectionManagers[Excel Connection Manager]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <outputs>
+                    <output
+                      refId="Package\Read Each Excel File to Database\Import Escheatment\Excel Source.Outputs[Excel Source Output]"
+                      name="Excel Source Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Read Each Excel File to Database\Import Escheatment\Excel Source.Outputs[Excel Source Output].Columns[Check #]"
+                          dataType="r8"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Read Each Excel File to Database\Import Escheatment\Excel Source.Outputs[Excel Source Output].ExternalColumns[Check #]"
+                          lineageId="Package\Read Each Excel File to Database\Import Escheatment\Excel Source.Outputs[Excel Source Output].Columns[Check #]"
+                          name="Check #"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Read Each Excel File to Database\Import Escheatment\Excel Source.Outputs[Excel Source Output].Columns[Payee]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Read Each Excel File to Database\Import Escheatment\Excel Source.Outputs[Excel Source Output].ExternalColumns[Payee]"
+                          length="255"
+                          lineageId="Package\Read Each Excel File to Database\Import Escheatment\Excel Source.Outputs[Excel Source Output].Columns[Payee]"
+                          name="Payee"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Read Each Excel File to Database\Import Escheatment\Excel Source.Outputs[Excel Source Output].Columns[Check Date]"
+                          dataType="date"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Read Each Excel File to Database\Import Escheatment\Excel Source.Outputs[Excel Source Output].ExternalColumns[Check Date]"
+                          lineageId="Package\Read Each Excel File to Database\Import Escheatment\Excel Source.Outputs[Excel Source Output].Columns[Check Date]"
+                          name="Check Date"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Read Each Excel File to Database\Import Escheatment\Excel Source.Outputs[Excel Source Output].Columns[Check Amount]"
+                          dataType="cy"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Read Each Excel File to Database\Import Escheatment\Excel Source.Outputs[Excel Source Output].ExternalColumns[Check Amount]"
+                          lineageId="Package\Read Each Excel File to Database\Import Escheatment\Excel Source.Outputs[Excel Source Output].Columns[Check Amount]"
+                          name="Check Amount"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Read Each Excel File to Database\Import Escheatment\Excel Source.Outputs[Excel Source Output].Columns[Claim Number]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Read Each Excel File to Database\Import Escheatment\Excel Source.Outputs[Excel Source Output].ExternalColumns[Claim Number]"
+                          length="255"
+                          lineageId="Package\Read Each Excel File to Database\Import Escheatment\Excel Source.Outputs[Excel Source Output].Columns[Claim Number]"
+                          name="Claim Number"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Read Each Excel File to Database\Import Escheatment\Excel Source.Outputs[Excel Source Output].Columns[Check Address 1]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Read Each Excel File to Database\Import Escheatment\Excel Source.Outputs[Excel Source Output].ExternalColumns[Check Address 1]"
+                          length="255"
+                          lineageId="Package\Read Each Excel File to Database\Import Escheatment\Excel Source.Outputs[Excel Source Output].Columns[Check Address 1]"
+                          name="Check Address 1"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Read Each Excel File to Database\Import Escheatment\Excel Source.Outputs[Excel Source Output].Columns[Check Address 2]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Read Each Excel File to Database\Import Escheatment\Excel Source.Outputs[Excel Source Output].ExternalColumns[Check Address 2]"
+                          length="255"
+                          lineageId="Package\Read Each Excel File to Database\Import Escheatment\Excel Source.Outputs[Excel Source Output].Columns[Check Address 2]"
+                          name="Check Address 2"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Read Each Excel File to Database\Import Escheatment\Excel Source.Outputs[Excel Source Output].Columns[Check City]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Read Each Excel File to Database\Import Escheatment\Excel Source.Outputs[Excel Source Output].ExternalColumns[Check City]"
+                          length="255"
+                          lineageId="Package\Read Each Excel File to Database\Import Escheatment\Excel Source.Outputs[Excel Source Output].Columns[Check City]"
+                          name="Check City"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Read Each Excel File to Database\Import Escheatment\Excel Source.Outputs[Excel Source Output].Columns[Check State]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Read Each Excel File to Database\Import Escheatment\Excel Source.Outputs[Excel Source Output].ExternalColumns[Check State]"
+                          length="255"
+                          lineageId="Package\Read Each Excel File to Database\Import Escheatment\Excel Source.Outputs[Excel Source Output].Columns[Check State]"
+                          name="Check State"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Read Each Excel File to Database\Import Escheatment\Excel Source.Outputs[Excel Source Output].Columns[Check Zip]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Read Each Excel File to Database\Import Escheatment\Excel Source.Outputs[Excel Source Output].ExternalColumns[Check Zip]"
+                          length="255"
+                          lineageId="Package\Read Each Excel File to Database\Import Escheatment\Excel Source.Outputs[Excel Source Output].Columns[Check Zip]"
+                          name="Check Zip"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Read Each Excel File to Database\Import Escheatment\Excel Source.Outputs[Excel Source Output].Columns[QL Notes]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Read Each Excel File to Database\Import Escheatment\Excel Source.Outputs[Excel Source Output].ExternalColumns[QL Notes]"
+                          length="255"
+                          lineageId="Package\Read Each Excel File to Database\Import Escheatment\Excel Source.Outputs[Excel Source Output].Columns[QL Notes]"
+                          name="QL Notes"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Read Each Excel File to Database\Import Escheatment\Excel Source.Outputs[Excel Source Output].Columns[DATE QL NOTES ENTERED:]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Read Each Excel File to Database\Import Escheatment\Excel Source.Outputs[Excel Source Output].ExternalColumns[DATE QL NOTES ENTERED:]"
+                          length="255"
+                          lineageId="Package\Read Each Excel File to Database\Import Escheatment\Excel Source.Outputs[Excel Source Output].Columns[DATE QL NOTES ENTERED:]"
+                          name="DATE QL NOTES ENTERED:"
+                          truncationRowDisposition="FailComponent" />
+                      </outputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Read Each Excel File to Database\Import Escheatment\Excel Source.Outputs[Excel Source Output].ExternalColumns[Check #]"
+                          dataType="r8"
+                          name="Check #" />
+                        <externalMetadataColumn
+                          refId="Package\Read Each Excel File to Database\Import Escheatment\Excel Source.Outputs[Excel Source Output].ExternalColumns[Payee]"
+                          dataType="wstr"
+                          length="255"
+                          name="Payee" />
+                        <externalMetadataColumn
+                          refId="Package\Read Each Excel File to Database\Import Escheatment\Excel Source.Outputs[Excel Source Output].ExternalColumns[Check Date]"
+                          dataType="date"
+                          name="Check Date" />
+                        <externalMetadataColumn
+                          refId="Package\Read Each Excel File to Database\Import Escheatment\Excel Source.Outputs[Excel Source Output].ExternalColumns[Check Amount]"
+                          dataType="cy"
+                          name="Check Amount" />
+                        <externalMetadataColumn
+                          refId="Package\Read Each Excel File to Database\Import Escheatment\Excel Source.Outputs[Excel Source Output].ExternalColumns[Claim Number]"
+                          dataType="wstr"
+                          length="255"
+                          name="Claim Number" />
+                        <externalMetadataColumn
+                          refId="Package\Read Each Excel File to Database\Import Escheatment\Excel Source.Outputs[Excel Source Output].ExternalColumns[Check Address 1]"
+                          dataType="wstr"
+                          length="255"
+                          name="Check Address 1" />
+                        <externalMetadataColumn
+                          refId="Package\Read Each Excel File to Database\Import Escheatment\Excel Source.Outputs[Excel Source Output].ExternalColumns[Check Address 2]"
+                          dataType="wstr"
+                          length="255"
+                          name="Check Address 2" />
+                        <externalMetadataColumn
+                          refId="Package\Read Each Excel File to Database\Import Escheatment\Excel Source.Outputs[Excel Source Output].ExternalColumns[Check City]"
+                          dataType="wstr"
+                          length="255"
+                          name="Check City" />
+                        <externalMetadataColumn
+                          refId="Package\Read Each Excel File to Database\Import Escheatment\Excel Source.Outputs[Excel Source Output].ExternalColumns[Check State]"
+                          dataType="wstr"
+                          length="255"
+                          name="Check State" />
+                        <externalMetadataColumn
+                          refId="Package\Read Each Excel File to Database\Import Escheatment\Excel Source.Outputs[Excel Source Output].ExternalColumns[Check Zip]"
+                          dataType="wstr"
+                          length="255"
+                          name="Check Zip" />
+                        <externalMetadataColumn
+                          refId="Package\Read Each Excel File to Database\Import Escheatment\Excel Source.Outputs[Excel Source Output].ExternalColumns[QL Notes]"
+                          dataType="wstr"
+                          length="255"
+                          name="QL Notes" />
+                        <externalMetadataColumn
+                          refId="Package\Read Each Excel File to Database\Import Escheatment\Excel Source.Outputs[Excel Source Output].ExternalColumns[DATE QL NOTES ENTERED:]"
+                          dataType="wstr"
+                          length="255"
+                          name="DATE QL NOTES ENTERED:" />
+                      </externalMetadataColumns>
+                    </output>
+                    <output
+                      refId="Package\Read Each Excel File to Database\Import Escheatment\Excel Source.Outputs[Excel Source Error Output]"
+                      isErrorOut="true"
+                      name="Excel Source Error Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Read Each Excel File to Database\Import Escheatment\Excel Source.Outputs[Excel Source Error Output].Columns[Check #]"
+                          dataType="r8"
+                          lineageId="Package\Read Each Excel File to Database\Import Escheatment\Excel Source.Outputs[Excel Source Error Output].Columns[Check #]"
+                          name="Check #" />
+                        <outputColumn
+                          refId="Package\Read Each Excel File to Database\Import Escheatment\Excel Source.Outputs[Excel Source Error Output].Columns[Payee]"
+                          dataType="wstr"
+                          length="255"
+                          lineageId="Package\Read Each Excel File to Database\Import Escheatment\Excel Source.Outputs[Excel Source Error Output].Columns[Payee]"
+                          name="Payee" />
+                        <outputColumn
+                          refId="Package\Read Each Excel File to Database\Import Escheatment\Excel Source.Outputs[Excel Source Error Output].Columns[Check Date]"
+                          dataType="date"
+                          lineageId="Package\Read Each Excel File to Database\Import Escheatment\Excel Source.Outputs[Excel Source Error Output].Columns[Check Date]"
+                          name="Check Date" />
+                        <outputColumn
+                          refId="Package\Read Each Excel File to Database\Import Escheatment\Excel Source.Outputs[Excel Source Error Output].Columns[Check Amount]"
+                          dataType="cy"
+                          lineageId="Package\Read Each Excel File to Database\Import Escheatment\Excel Source.Outputs[Excel Source Error Output].Columns[Check Amount]"
+                          name="Check Amount" />
+                        <outputColumn
+                          refId="Package\Read Each Excel File to Database\Import Escheatment\Excel Source.Outputs[Excel Source Error Output].Columns[Claim Number]"
+                          dataType="wstr"
+                          length="255"
+                          lineageId="Package\Read Each Excel File to Database\Import Escheatment\Excel Source.Outputs[Excel Source Error Output].Columns[Claim Number]"
+                          name="Claim Number" />
+                        <outputColumn
+                          refId="Package\Read Each Excel File to Database\Import Escheatment\Excel Source.Outputs[Excel Source Error Output].Columns[Check Address 1]"
+                          dataType="wstr"
+                          length="255"
+                          lineageId="Package\Read Each Excel File to Database\Import Escheatment\Excel Source.Outputs[Excel Source Error Output].Columns[Check Address 1]"
+                          name="Check Address 1" />
+                        <outputColumn
+                          refId="Package\Read Each Excel File to Database\Import Escheatment\Excel Source.Outputs[Excel Source Error Output].Columns[Check Address 2]"
+                          dataType="wstr"
+                          length="255"
+                          lineageId="Package\Read Each Excel File to Database\Import Escheatment\Excel Source.Outputs[Excel Source Error Output].Columns[Check Address 2]"
+                          name="Check Address 2" />
+                        <outputColumn
+                          refId="Package\Read Each Excel File to Database\Import Escheatment\Excel Source.Outputs[Excel Source Error Output].Columns[Check City]"
+                          dataType="wstr"
+                          length="255"
+                          lineageId="Package\Read Each Excel File to Database\Import Escheatment\Excel Source.Outputs[Excel Source Error Output].Columns[Check City]"
+                          name="Check City" />
+                        <outputColumn
+                          refId="Package\Read Each Excel File to Database\Import Escheatment\Excel Source.Outputs[Excel Source Error Output].Columns[Check State]"
+                          dataType="wstr"
+                          length="255"
+                          lineageId="Package\Read Each Excel File to Database\Import Escheatment\Excel Source.Outputs[Excel Source Error Output].Columns[Check State]"
+                          name="Check State" />
+                        <outputColumn
+                          refId="Package\Read Each Excel File to Database\Import Escheatment\Excel Source.Outputs[Excel Source Error Output].Columns[Check Zip]"
+                          dataType="wstr"
+                          length="255"
+                          lineageId="Package\Read Each Excel File to Database\Import Escheatment\Excel Source.Outputs[Excel Source Error Output].Columns[Check Zip]"
+                          name="Check Zip" />
+                        <outputColumn
+                          refId="Package\Read Each Excel File to Database\Import Escheatment\Excel Source.Outputs[Excel Source Error Output].Columns[QL Notes]"
+                          dataType="wstr"
+                          length="255"
+                          lineageId="Package\Read Each Excel File to Database\Import Escheatment\Excel Source.Outputs[Excel Source Error Output].Columns[QL Notes]"
+                          name="QL Notes" />
+                        <outputColumn
+                          refId="Package\Read Each Excel File to Database\Import Escheatment\Excel Source.Outputs[Excel Source Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Read Each Excel File to Database\Import Escheatment\Excel Source.Outputs[Excel Source Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Read Each Excel File to Database\Import Escheatment\Excel Source.Outputs[Excel Source Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Read Each Excel File to Database\Import Escheatment\Excel Source.Outputs[Excel Source Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                        <outputColumn
+                          refId="Package\Read Each Excel File to Database\Import Escheatment\Excel Source.Outputs[Excel Source Error Output].Columns[DATE QL NOTES ENTERED:]"
+                          dataType="wstr"
+                          length="255"
+                          lineageId="Package\Read Each Excel File to Database\Import Escheatment\Excel Source.Outputs[Excel Source Error Output].Columns[DATE QL NOTES ENTERED:]"
+                          name="DATE QL NOTES ENTERED:" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Read Each Excel File to Database\Import Escheatment\OLE DB Destination"
+                  componentClassID="Microsoft.OLEDBDestination"
+                  contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+                  description="OLE DB Destination"
+                  name="OLE DB Destination"
+                  usesDispositions="true"
+                  version="4">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset">[dbo].[Enr_Stage_Data]</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">3</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepIdentity">false</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepNulls">false</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                      name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                      name="FastLoadMaxInsertCommitSize">2147483647</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Read Each Excel File to Database\Import Escheatment\OLE DB Destination.Connections[OleDbConnection]"
+                      connectionManagerID="Package.ConnectionManagers[acisql2012.ACIrobot]"
+                      connectionManagerRefId="Package.ConnectionManagers[acisql2012.ACIrobot]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <inputs>
+                    <input
+                      refId="Package\Read Each Excel File to Database\Import Escheatment\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                      errorOrTruncationOperation="Insert"
+                      errorRowDisposition="FailComponent"
+                      hasSideEffects="true"
+                      name="OLE DB Destination Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Read Each Excel File to Database\Import Escheatment\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Copy of Check #]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="25"
+                          cachedName="Copy of Check #"
+                          externalMetadataColumnId="Package\Read Each Excel File to Database\Import Escheatment\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CheckNumber]"
+                          lineageId="Package\Read Each Excel File to Database\Import Escheatment\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of Check #]" />
+                        <inputColumn
+                          refId="Package\Read Each Excel File to Database\Import Escheatment\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Copy of Payee]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="55"
+                          cachedName="Copy of Payee"
+                          externalMetadataColumnId="Package\Read Each Excel File to Database\Import Escheatment\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Payee]"
+                          lineageId="Package\Read Each Excel File to Database\Import Escheatment\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of Payee]" />
+                        <inputColumn
+                          refId="Package\Read Each Excel File to Database\Import Escheatment\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Copy of Check Date]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="15"
+                          cachedName="Copy of Check Date"
+                          externalMetadataColumnId="Package\Read Each Excel File to Database\Import Escheatment\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CheckDate]"
+                          lineageId="Package\Read Each Excel File to Database\Import Escheatment\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of Check Date]" />
+                        <inputColumn
+                          refId="Package\Read Each Excel File to Database\Import Escheatment\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Copy of Check Amount]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="10"
+                          cachedName="Copy of Check Amount"
+                          externalMetadataColumnId="Package\Read Each Excel File to Database\Import Escheatment\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CheckAmount]"
+                          lineageId="Package\Read Each Excel File to Database\Import Escheatment\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of Check Amount]" />
+                        <inputColumn
+                          refId="Package\Read Each Excel File to Database\Import Escheatment\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Copy of Claim Number]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="15"
+                          cachedName="Copy of Claim Number"
+                          externalMetadataColumnId="Package\Read Each Excel File to Database\Import Escheatment\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ClaimNumber]"
+                          lineageId="Package\Read Each Excel File to Database\Import Escheatment\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of Claim Number]" />
+                        <inputColumn
+                          refId="Package\Read Each Excel File to Database\Import Escheatment\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Copy of Check Address 1]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="55"
+                          cachedName="Copy of Check Address 1"
+                          externalMetadataColumnId="Package\Read Each Excel File to Database\Import Escheatment\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CheckAddress1]"
+                          lineageId="Package\Read Each Excel File to Database\Import Escheatment\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of Check Address 1]" />
+                        <inputColumn
+                          refId="Package\Read Each Excel File to Database\Import Escheatment\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Copy of Check Address 2]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="55"
+                          cachedName="Copy of Check Address 2"
+                          externalMetadataColumnId="Package\Read Each Excel File to Database\Import Escheatment\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CheckAddress2]"
+                          lineageId="Package\Read Each Excel File to Database\Import Escheatment\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of Check Address 2]" />
+                        <inputColumn
+                          refId="Package\Read Each Excel File to Database\Import Escheatment\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Copy of Check City]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="Copy of Check City"
+                          externalMetadataColumnId="Package\Read Each Excel File to Database\Import Escheatment\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CheckCity]"
+                          lineageId="Package\Read Each Excel File to Database\Import Escheatment\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of Check City]" />
+                        <inputColumn
+                          refId="Package\Read Each Excel File to Database\Import Escheatment\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Copy of Check State]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="2"
+                          cachedName="Copy of Check State"
+                          externalMetadataColumnId="Package\Read Each Excel File to Database\Import Escheatment\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CheckState]"
+                          lineageId="Package\Read Each Excel File to Database\Import Escheatment\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of Check State]" />
+                        <inputColumn
+                          refId="Package\Read Each Excel File to Database\Import Escheatment\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Copy of Check Zip]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="10"
+                          cachedName="Copy of Check Zip"
+                          externalMetadataColumnId="Package\Read Each Excel File to Database\Import Escheatment\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CheckZip]"
+                          lineageId="Package\Read Each Excel File to Database\Import Escheatment\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of Check Zip]" />
+                        <inputColumn
+                          refId="Package\Read Each Excel File to Database\Import Escheatment\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Copy of QL Notes]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="150"
+                          cachedName="Copy of QL Notes"
+                          externalMetadataColumnId="Package\Read Each Excel File to Database\Import Escheatment\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[QLNotes]"
+                          lineageId="Package\Read Each Excel File to Database\Import Escheatment\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of QL Notes]" />
+                      </inputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Read Each Excel File to Database\Import Escheatment\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ID]"
+                          dataType="i4"
+                          name="ID" />
+                        <externalMetadataColumn
+                          refId="Package\Read Each Excel File to Database\Import Escheatment\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CheckNumber]"
+                          codePage="1252"
+                          dataType="str"
+                          length="25"
+                          name="CheckNumber" />
+                        <externalMetadataColumn
+                          refId="Package\Read Each Excel File to Database\Import Escheatment\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Payee]"
+                          codePage="1252"
+                          dataType="str"
+                          length="55"
+                          name="Payee" />
+                        <externalMetadataColumn
+                          refId="Package\Read Each Excel File to Database\Import Escheatment\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CheckDate]"
+                          codePage="1252"
+                          dataType="str"
+                          length="15"
+                          name="CheckDate" />
+                        <externalMetadataColumn
+                          refId="Package\Read Each Excel File to Database\Import Escheatment\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CheckAmount]"
+                          codePage="1252"
+                          dataType="str"
+                          length="10"
+                          name="CheckAmount" />
+                        <externalMetadataColumn
+                          refId="Package\Read Each Excel File to Database\Import Escheatment\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ClaimNumber]"
+                          codePage="1252"
+                          dataType="str"
+                          length="15"
+                          name="ClaimNumber" />
+                        <externalMetadataColumn
+                          refId="Package\Read Each Excel File to Database\Import Escheatment\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CheckAddress1]"
+                          codePage="1252"
+                          dataType="str"
+                          length="55"
+                          name="CheckAddress1" />
+                        <externalMetadataColumn
+                          refId="Package\Read Each Excel File to Database\Import Escheatment\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CheckAddress2]"
+                          codePage="1252"
+                          dataType="str"
+                          length="55"
+                          name="CheckAddress2" />
+                        <externalMetadataColumn
+                          refId="Package\Read Each Excel File to Database\Import Escheatment\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CheckCity]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="CheckCity" />
+                        <externalMetadataColumn
+                          refId="Package\Read Each Excel File to Database\Import Escheatment\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CheckState]"
+                          codePage="1252"
+                          dataType="str"
+                          length="2"
+                          name="CheckState" />
+                        <externalMetadataColumn
+                          refId="Package\Read Each Excel File to Database\Import Escheatment\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CheckZip]"
+                          codePage="1252"
+                          dataType="str"
+                          length="10"
+                          name="CheckZip" />
+                        <externalMetadataColumn
+                          refId="Package\Read Each Excel File to Database\Import Escheatment\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[QLNotes]"
+                          codePage="1252"
+                          dataType="str"
+                          length="150"
+                          name="QLNotes" />
+                        <externalMetadataColumn
+                          refId="Package\Read Each Excel File to Database\Import Escheatment\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[RecordCreateDate]"
+                          dataType="dbDate"
+                          name="RecordCreateDate" />
+                      </externalMetadataColumns>
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Read Each Excel File to Database\Import Escheatment\OLE DB Destination.Outputs[OLE DB Destination Error Output]"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="OLE DB Destination Error Output"
+                      synchronousInputId="Package\Read Each Excel File to Database\Import Escheatment\OLE DB Destination.Inputs[OLE DB Destination Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Read Each Excel File to Database\Import Escheatment\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Read Each Excel File to Database\Import Escheatment\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Read Each Excel File to Database\Import Escheatment\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Read Each Excel File to Database\Import Escheatment\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+              </components>
+              <paths>
+                <path
+                  refId="Package\Read Each Excel File to Database\Import Escheatment.Paths[Data Conversion Output]"
+                  endId="Package\Read Each Excel File to Database\Import Escheatment\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                  name="Data Conversion Output"
+                  startId="Package\Read Each Excel File to Database\Import Escheatment\Data Conversion.Outputs[Data Conversion Output]" />
+                <path
+                  refId="Package\Read Each Excel File to Database\Import Escheatment.Paths[Excel Source Output]"
+                  endId="Package\Read Each Excel File to Database\Import Escheatment\Data Conversion.Inputs[Data Conversion Input]"
+                  name="Excel Source Output"
+                  startId="Package\Read Each Excel File to Database\Import Escheatment\Excel Source.Outputs[Excel Source Output]" />
+              </paths>
+            </pipeline>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Read Each Excel File to Database\Remove empty rows"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{E077034C-5BD3-42E7-B951-5F31B7D0E53E}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Remove empty rows"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2019; © 2019 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{2483A934-3461-4BF4-B40E-60BD135A4A8F}"
+              SQLTask:SqlStatementSource="Delete ec&#xA;  From Enr_Stage_Data ec (NOLOCK)&#xA;  Where LEN(ISNULL(LTRIM(RTRIM(ec.CheckNumber) ), '') ) = 0&#xA;&#x9;and LEN(ISNULL(LTRIM(RTRIM(ec.Payee) ), '') ) = 0&#xA;&#x9;and LEN(ISNULL(LTRIM(RTRIM(ec.CheckDate) ), '') ) = 0&#xA;&#x9;and LEN(ISNULL(LTRIM(RTRIM(ec.CheckAmount) ), '') ) = 0&#xA;&#x9;and LEN(ISNULL(LTRIM(RTRIM(ec.ClaimNumber) ), '') ) = 0&#xA;&#x9;and LEN(ISNULL(LTRIM(RTRIM(ec.CheckAddress1) ), '') ) = 0&#xA;&#x9;and LEN(ISNULL(LTRIM(RTRIM(ec.CheckAddress2) ), '') ) = 0&#xA;&#x9;and LEN(ISNULL(LTRIM(RTRIM(ec.CheckCity) ), '') ) = 0&#xA;&#x9;and LEN(ISNULL(LTRIM(RTRIM(ec.CheckState) ), '') ) = 0&#xA;&#x9;and LEN(ISNULL(LTRIM(RTRIM(ec.CheckZip) ), '') ) = 0&#xA;&#x9;and LEN(ISNULL(LTRIM(RTRIM(ec.QLNotes) ), '') ) = 0&#xA;&#x9;and LEN(ISNULL(LTRIM(RTRIM(ec.RecordCreateDate) ), '') ) = 0" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Read Each Excel File to Database\Write Data from Sql"
+          DTS:CreationName="Microsoft.Pipeline"
+          DTS:Description="Data Flow Task"
+          DTS:DTSID="{B9800152-88AB-410C-8C1B-CC804E41913E}"
+          DTS:ExecutableType="Microsoft.Pipeline"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Write Data from Sql"
+          DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <pipeline
+              version="1">
+              <components>
+                <component
+                  refId="Package\Read Each Excel File to Database\Write Data from Sql\Flat File Destination"
+                  componentClassID="Microsoft.FlatFileDestination"
+                  contactInfo="Flat File Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+                  description="Flat File Destination"
+                  localeId="1033"
+                  name="Flat File Destination"
+                  version="1">
+                  <properties>
+                    <property
+                      dataType="System.Boolean"
+                      description="Specifies whether the data will overwrite or append to the destination file."
+                      name="Overwrite">true</property>
+                    <property
+                      dataType="System.Null"
+                      description="Specifies the text to write to the destination file before any data is written."
+                      expressionType="Notify"
+                      name="Header" />
+                    <property
+                      dataType="System.Boolean"
+                      description="When text qualifier is enabled, specifies whether the text qualifier in the data written to the destination file will be escaped or not."
+                      name="EscapeQualifier">false</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Read Each Excel File to Database\Write Data from Sql\Flat File Destination.Connections[FlatFileConnection]"
+                      connectionManagerID="Package.ConnectionManagers[Destination file Conn]"
+                      connectionManagerRefId="Package.ConnectionManagers[Destination file Conn]"
+                      name="FlatFileConnection" />
+                  </connections>
+                  <inputs>
+                    <input
+                      refId="Package\Read Each Excel File to Database\Write Data from Sql\Flat File Destination.Inputs[Flat File Destination Input]"
+                      hasSideEffects="true"
+                      name="Flat File Destination Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Read Each Excel File to Database\Write Data from Sql\Flat File Destination.Inputs[Flat File Destination Input].Columns[ID]"
+                          cachedDataType="i4"
+                          cachedName="ID"
+                          externalMetadataColumnId="Package\Read Each Excel File to Database\Write Data from Sql\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[ID]"
+                          lineageId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Output].Columns[ID]" />
+                        <inputColumn
+                          refId="Package\Read Each Excel File to Database\Write Data from Sql\Flat File Destination.Inputs[Flat File Destination Input].Columns[CheckNumber]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="25"
+                          cachedName="CheckNumber"
+                          externalMetadataColumnId="Package\Read Each Excel File to Database\Write Data from Sql\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[CheckNumber]"
+                          lineageId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Output].Columns[CheckNumber]" />
+                        <inputColumn
+                          refId="Package\Read Each Excel File to Database\Write Data from Sql\Flat File Destination.Inputs[Flat File Destination Input].Columns[Payee]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="55"
+                          cachedName="Payee"
+                          externalMetadataColumnId="Package\Read Each Excel File to Database\Write Data from Sql\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Payee]"
+                          lineageId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Output].Columns[Payee]" />
+                        <inputColumn
+                          refId="Package\Read Each Excel File to Database\Write Data from Sql\Flat File Destination.Inputs[Flat File Destination Input].Columns[CheckDate]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="15"
+                          cachedName="CheckDate"
+                          externalMetadataColumnId="Package\Read Each Excel File to Database\Write Data from Sql\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[CheckDate]"
+                          lineageId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Output].Columns[CheckDate]" />
+                        <inputColumn
+                          refId="Package\Read Each Excel File to Database\Write Data from Sql\Flat File Destination.Inputs[Flat File Destination Input].Columns[CheckAmount]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="10"
+                          cachedName="CheckAmount"
+                          externalMetadataColumnId="Package\Read Each Excel File to Database\Write Data from Sql\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[CheckAmount]"
+                          lineageId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Output].Columns[CheckAmount]" />
+                        <inputColumn
+                          refId="Package\Read Each Excel File to Database\Write Data from Sql\Flat File Destination.Inputs[Flat File Destination Input].Columns[ClaimNumber]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="15"
+                          cachedName="ClaimNumber"
+                          externalMetadataColumnId="Package\Read Each Excel File to Database\Write Data from Sql\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[ClaimNumber]"
+                          lineageId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Output].Columns[ClaimNumber]" />
+                        <inputColumn
+                          refId="Package\Read Each Excel File to Database\Write Data from Sql\Flat File Destination.Inputs[Flat File Destination Input].Columns[CheckAddress1]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="55"
+                          cachedName="CheckAddress1"
+                          externalMetadataColumnId="Package\Read Each Excel File to Database\Write Data from Sql\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[CheckAddress1]"
+                          lineageId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Output].Columns[CheckAddress1]" />
+                        <inputColumn
+                          refId="Package\Read Each Excel File to Database\Write Data from Sql\Flat File Destination.Inputs[Flat File Destination Input].Columns[CheckAddress2]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="55"
+                          cachedName="CheckAddress2"
+                          externalMetadataColumnId="Package\Read Each Excel File to Database\Write Data from Sql\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[CheckAddress2]"
+                          lineageId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Output].Columns[CheckAddress2]" />
+                        <inputColumn
+                          refId="Package\Read Each Excel File to Database\Write Data from Sql\Flat File Destination.Inputs[Flat File Destination Input].Columns[CheckCity]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="CheckCity"
+                          externalMetadataColumnId="Package\Read Each Excel File to Database\Write Data from Sql\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[CheckCity]"
+                          lineageId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Output].Columns[CheckCity]" />
+                        <inputColumn
+                          refId="Package\Read Each Excel File to Database\Write Data from Sql\Flat File Destination.Inputs[Flat File Destination Input].Columns[CheckState]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="2"
+                          cachedName="CheckState"
+                          externalMetadataColumnId="Package\Read Each Excel File to Database\Write Data from Sql\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[CheckState]"
+                          lineageId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Output].Columns[CheckState]" />
+                        <inputColumn
+                          refId="Package\Read Each Excel File to Database\Write Data from Sql\Flat File Destination.Inputs[Flat File Destination Input].Columns[CheckZip]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="10"
+                          cachedName="CheckZip"
+                          externalMetadataColumnId="Package\Read Each Excel File to Database\Write Data from Sql\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[CheckZip]"
+                          lineageId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Output].Columns[CheckZip]" />
+                        <inputColumn
+                          refId="Package\Read Each Excel File to Database\Write Data from Sql\Flat File Destination.Inputs[Flat File Destination Input].Columns[QLNotes]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="150"
+                          cachedName="QLNotes"
+                          externalMetadataColumnId="Package\Read Each Excel File to Database\Write Data from Sql\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[QLNotes]"
+                          lineageId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Output].Columns[QLNotes]" />
+                        <inputColumn
+                          refId="Package\Read Each Excel File to Database\Write Data from Sql\Flat File Destination.Inputs[Flat File Destination Input].Columns[RecordCreateDate]"
+                          cachedDataType="dbDate"
+                          cachedName="RecordCreateDate"
+                          externalMetadataColumnId="Package\Read Each Excel File to Database\Write Data from Sql\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[RecordCreateDate]"
+                          lineageId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Output].Columns[RecordCreateDate]" />
+                      </inputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Read Each Excel File to Database\Write Data from Sql\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[ID]"
+                          dataType="i4"
+                          name="ID" />
+                        <externalMetadataColumn
+                          refId="Package\Read Each Excel File to Database\Write Data from Sql\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[CheckNumber]"
+                          codePage="1252"
+                          dataType="str"
+                          length="25"
+                          name="CheckNumber" />
+                        <externalMetadataColumn
+                          refId="Package\Read Each Excel File to Database\Write Data from Sql\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Payee]"
+                          codePage="1252"
+                          dataType="str"
+                          length="55"
+                          name="Payee" />
+                        <externalMetadataColumn
+                          refId="Package\Read Each Excel File to Database\Write Data from Sql\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[CheckDate]"
+                          codePage="1252"
+                          dataType="str"
+                          length="15"
+                          name="CheckDate" />
+                        <externalMetadataColumn
+                          refId="Package\Read Each Excel File to Database\Write Data from Sql\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[CheckAmount]"
+                          codePage="1252"
+                          dataType="str"
+                          length="10"
+                          name="CheckAmount" />
+                        <externalMetadataColumn
+                          refId="Package\Read Each Excel File to Database\Write Data from Sql\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[ClaimNumber]"
+                          codePage="1252"
+                          dataType="str"
+                          length="15"
+                          name="ClaimNumber" />
+                        <externalMetadataColumn
+                          refId="Package\Read Each Excel File to Database\Write Data from Sql\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[CheckAddress1]"
+                          codePage="1252"
+                          dataType="str"
+                          length="55"
+                          name="CheckAddress1" />
+                        <externalMetadataColumn
+                          refId="Package\Read Each Excel File to Database\Write Data from Sql\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[CheckAddress2]"
+                          codePage="1252"
+                          dataType="str"
+                          length="55"
+                          name="CheckAddress2" />
+                        <externalMetadataColumn
+                          refId="Package\Read Each Excel File to Database\Write Data from Sql\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[CheckCity]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="CheckCity" />
+                        <externalMetadataColumn
+                          refId="Package\Read Each Excel File to Database\Write Data from Sql\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[CheckState]"
+                          codePage="1252"
+                          dataType="str"
+                          length="2"
+                          name="CheckState" />
+                        <externalMetadataColumn
+                          refId="Package\Read Each Excel File to Database\Write Data from Sql\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[CheckZip]"
+                          codePage="1252"
+                          dataType="str"
+                          length="10"
+                          name="CheckZip" />
+                        <externalMetadataColumn
+                          refId="Package\Read Each Excel File to Database\Write Data from Sql\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[QLNotes]"
+                          codePage="1252"
+                          dataType="str"
+                          length="150"
+                          name="QLNotes" />
+                        <externalMetadataColumn
+                          refId="Package\Read Each Excel File to Database\Write Data from Sql\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[RecordCreateDate]"
+                          dataType="dbDate"
+                          name="RecordCreateDate" />
+                      </externalMetadataColumns>
+                    </input>
+                  </inputs>
+                </component>
+                <component
+                  refId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source"
+                  componentClassID="Microsoft.OLEDBSource"
+                  contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+                  description="OLE DB Source"
+                  name="OLE DB Source"
+                  usesDispositions="true"
+                  version="7">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset">[dbo].[Enr_Stage_Data]</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                    <property
+                      dataType="System.String"
+                      description="The variable that contains the SQL command to be executed."
+                      name="SqlCommandVariable"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">0</property>
+                    <property
+                      dataType="System.String"
+                      description="The mappings between the parameters in the SQL command and variables."
+                      name="ParameterMapping"></property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Connections[OleDbConnection]"
+                      connectionManagerID="Package.ConnectionManagers[acisql2012.ACIrobot]"
+                      connectionManagerRefId="Package.ConnectionManagers[acisql2012.ACIrobot]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <outputs>
+                    <output
+                      refId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Output]"
+                      name="OLE DB Source Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Output].Columns[ID]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ID]"
+                          lineageId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Output].Columns[ID]"
+                          name="ID"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Output].Columns[CheckNumber]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[CheckNumber]"
+                          length="25"
+                          lineageId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Output].Columns[CheckNumber]"
+                          name="CheckNumber"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Output].Columns[Payee]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Payee]"
+                          length="55"
+                          lineageId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Output].Columns[Payee]"
+                          name="Payee"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Output].Columns[CheckDate]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[CheckDate]"
+                          length="15"
+                          lineageId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Output].Columns[CheckDate]"
+                          name="CheckDate"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Output].Columns[CheckAmount]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[CheckAmount]"
+                          length="10"
+                          lineageId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Output].Columns[CheckAmount]"
+                          name="CheckAmount"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Output].Columns[ClaimNumber]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ClaimNumber]"
+                          length="15"
+                          lineageId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Output].Columns[ClaimNumber]"
+                          name="ClaimNumber"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Output].Columns[CheckAddress1]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[CheckAddress1]"
+                          length="55"
+                          lineageId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Output].Columns[CheckAddress1]"
+                          name="CheckAddress1"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Output].Columns[CheckAddress2]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[CheckAddress2]"
+                          length="55"
+                          lineageId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Output].Columns[CheckAddress2]"
+                          name="CheckAddress2"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Output].Columns[CheckCity]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[CheckCity]"
+                          length="50"
+                          lineageId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Output].Columns[CheckCity]"
+                          name="CheckCity"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Output].Columns[CheckState]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[CheckState]"
+                          length="2"
+                          lineageId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Output].Columns[CheckState]"
+                          name="CheckState"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Output].Columns[CheckZip]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[CheckZip]"
+                          length="10"
+                          lineageId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Output].Columns[CheckZip]"
+                          name="CheckZip"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Output].Columns[QLNotes]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[QLNotes]"
+                          length="150"
+                          lineageId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Output].Columns[QLNotes]"
+                          name="QLNotes"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Output].Columns[RecordCreateDate]"
+                          dataType="dbDate"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[RecordCreateDate]"
+                          lineageId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Output].Columns[RecordCreateDate]"
+                          name="RecordCreateDate"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Output].Columns[EnrSeq]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[EnrSeq]"
+                          lineageId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Output].Columns[EnrSeq]"
+                          name="EnrSeq"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Output].Columns[DepCode]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[DepCode]"
+                          length="1"
+                          lineageId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Output].Columns[DepCode]"
+                          name="DepCode"
+                          truncationRowDisposition="FailComponent" />
+                      </outputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ID]"
+                          dataType="i4"
+                          name="ID" />
+                        <externalMetadataColumn
+                          refId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[CheckNumber]"
+                          codePage="1252"
+                          dataType="str"
+                          length="25"
+                          name="CheckNumber" />
+                        <externalMetadataColumn
+                          refId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Payee]"
+                          codePage="1252"
+                          dataType="str"
+                          length="55"
+                          name="Payee" />
+                        <externalMetadataColumn
+                          refId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[CheckDate]"
+                          codePage="1252"
+                          dataType="str"
+                          length="15"
+                          name="CheckDate" />
+                        <externalMetadataColumn
+                          refId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[CheckAmount]"
+                          codePage="1252"
+                          dataType="str"
+                          length="10"
+                          name="CheckAmount" />
+                        <externalMetadataColumn
+                          refId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ClaimNumber]"
+                          codePage="1252"
+                          dataType="str"
+                          length="15"
+                          name="ClaimNumber" />
+                        <externalMetadataColumn
+                          refId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[CheckAddress1]"
+                          codePage="1252"
+                          dataType="str"
+                          length="55"
+                          name="CheckAddress1" />
+                        <externalMetadataColumn
+                          refId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[CheckAddress2]"
+                          codePage="1252"
+                          dataType="str"
+                          length="55"
+                          name="CheckAddress2" />
+                        <externalMetadataColumn
+                          refId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[CheckCity]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="CheckCity" />
+                        <externalMetadataColumn
+                          refId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[CheckState]"
+                          codePage="1252"
+                          dataType="str"
+                          length="2"
+                          name="CheckState" />
+                        <externalMetadataColumn
+                          refId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[CheckZip]"
+                          codePage="1252"
+                          dataType="str"
+                          length="10"
+                          name="CheckZip" />
+                        <externalMetadataColumn
+                          refId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[QLNotes]"
+                          codePage="1252"
+                          dataType="str"
+                          length="150"
+                          name="QLNotes" />
+                        <externalMetadataColumn
+                          refId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[RecordCreateDate]"
+                          dataType="dbDate"
+                          name="RecordCreateDate" />
+                        <externalMetadataColumn
+                          refId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[EnrSeq]"
+                          dataType="i4"
+                          name="EnrSeq" />
+                        <externalMetadataColumn
+                          refId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[DepCode]"
+                          codePage="1252"
+                          dataType="str"
+                          length="1"
+                          name="DepCode" />
+                      </externalMetadataColumns>
+                    </output>
+                    <output
+                      refId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Error Output]"
+                      isErrorOut="true"
+                      name="OLE DB Source Error Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ID]"
+                          dataType="i4"
+                          lineageId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ID]"
+                          name="ID" />
+                        <outputColumn
+                          refId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[CheckNumber]"
+                          codePage="1252"
+                          dataType="str"
+                          length="25"
+                          lineageId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[CheckNumber]"
+                          name="CheckNumber" />
+                        <outputColumn
+                          refId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Payee]"
+                          codePage="1252"
+                          dataType="str"
+                          length="55"
+                          lineageId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Payee]"
+                          name="Payee" />
+                        <outputColumn
+                          refId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[CheckDate]"
+                          codePage="1252"
+                          dataType="str"
+                          length="15"
+                          lineageId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[CheckDate]"
+                          name="CheckDate" />
+                        <outputColumn
+                          refId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[CheckAmount]"
+                          codePage="1252"
+                          dataType="str"
+                          length="10"
+                          lineageId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[CheckAmount]"
+                          name="CheckAmount" />
+                        <outputColumn
+                          refId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ClaimNumber]"
+                          codePage="1252"
+                          dataType="str"
+                          length="15"
+                          lineageId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ClaimNumber]"
+                          name="ClaimNumber" />
+                        <outputColumn
+                          refId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[CheckAddress1]"
+                          codePage="1252"
+                          dataType="str"
+                          length="55"
+                          lineageId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[CheckAddress1]"
+                          name="CheckAddress1" />
+                        <outputColumn
+                          refId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[CheckAddress2]"
+                          codePage="1252"
+                          dataType="str"
+                          length="55"
+                          lineageId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[CheckAddress2]"
+                          name="CheckAddress2" />
+                        <outputColumn
+                          refId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[CheckCity]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          lineageId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[CheckCity]"
+                          name="CheckCity" />
+                        <outputColumn
+                          refId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[CheckState]"
+                          codePage="1252"
+                          dataType="str"
+                          length="2"
+                          lineageId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[CheckState]"
+                          name="CheckState" />
+                        <outputColumn
+                          refId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[CheckZip]"
+                          codePage="1252"
+                          dataType="str"
+                          length="10"
+                          lineageId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[CheckZip]"
+                          name="CheckZip" />
+                        <outputColumn
+                          refId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[QLNotes]"
+                          codePage="1252"
+                          dataType="str"
+                          length="150"
+                          lineageId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[QLNotes]"
+                          name="QLNotes" />
+                        <outputColumn
+                          refId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[RecordCreateDate]"
+                          dataType="dbDate"
+                          lineageId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[RecordCreateDate]"
+                          name="RecordCreateDate" />
+                        <outputColumn
+                          refId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[EnrSeq]"
+                          dataType="i4"
+                          lineageId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[EnrSeq]"
+                          name="EnrSeq" />
+                        <outputColumn
+                          refId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[DepCode]"
+                          codePage="1252"
+                          dataType="str"
+                          length="1"
+                          lineageId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[DepCode]"
+                          name="DepCode" />
+                        <outputColumn
+                          refId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+              </components>
+              <paths>
+                <path
+                  refId="Package\Read Each Excel File to Database\Write Data from Sql.Paths[OLE DB Source Output]"
+                  endId="Package\Read Each Excel File to Database\Write Data from Sql\Flat File Destination.Inputs[Flat File Destination Input]"
+                  name="OLE DB Source Output"
+                  startId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Output]" />
+              </paths>
+            </pipeline>
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+      <DTS:PrecedenceConstraints>
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Read Each Excel File to Database.PrecedenceConstraints[Constraint]"
+          DTS:CreationName=""
+          DTS:DTSID="{686795C9-4AA3-4313-9055-B2208EBF60B3}"
+          DTS:From="Package\Read Each Excel File to Database\Import Escheatment"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint"
+          DTS:To="Package\Read Each Excel File to Database\Remove empty rows" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Read Each Excel File to Database.PrecedenceConstraints[Constraint 1]"
+          DTS:CreationName=""
+          DTS:DTSID="{D1966D24-187D-489C-8ABB-6D0F1202471A}"
+          DTS:From="Package\Read Each Excel File to Database\Remove empty rows"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 1"
+          DTS:To="Package\Read Each Excel File to Database\Write Data from Sql" />
+      </DTS:PrecedenceConstraints>
+      <DTS:ForEachVariableMappings>
+        <DTS:ForEachVariableMapping
+          DTS:CreationName=""
+          DTS:DTSID="{F83437E6-A7CC-45DE-8C6C-3037D7117EE4}"
+          DTS:ObjectName="{F83437E6-A7CC-45DE-8C6C-3037D7117EE4}"
+          DTS:ValueIndex="0"
+          DTS:VariableName="User::FileName" />
+      </DTS:ForEachVariableMappings>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Remove original"
+      DTS:CreationName="Microsoft.FileSystemTask"
+      DTS:DelayValidation="True"
+      DTS:Description="File System Task"
+      DTS:DTSID="{47F7861E-437A-4557-A906-DAFACE9E0DE9}"
+      DTS:ExecutableType="Microsoft.FileSystemTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Remove original"
+      DTS:TaskContact="File System Task;Microsoft Corporation; SQL Server 2019; © 2019 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <FileSystemData
+          TaskOperationType="DeleteDirectoryContent"
+          TaskSourcePath="User::ProdFilesFolder"
+          TaskIsSourceVariable="True" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Truncate Stage Table"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{80CC3088-7CA8-4D26-A7D1-7E0CA8DA4272}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Truncate Stage Table"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2019; © 2019 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{2483A934-3461-4BF4-B40E-60BD135A4A8F}"
+          SQLTask:SqlStatementSource="TRUNCATE TABLE Enr_Stage_Data" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{EDB34AFB-C632-4C4F-81C0-D3730F0DAECC}"
+      DTS:From="Package\Delete records older than 30 days"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Create File Name" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{983BD580-A987-4C4D-9125-91A4C4C37289}"
+      DTS:From="Package\Truncate Stage Table"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\Delete records older than 30 days" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
+      DTS:CreationName=""
+      DTS:DTSID="{CCCA1CE2-D60E-4933-B455-1BDBDF89A8B5}"
+      DTS:From="Package\Create File Name"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 2"
+      DTS:To="Package\Read Each Excel File to Database" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 3]"
+      DTS:CreationName=""
+      DTS:DTSID="{E9F04CE9-A808-4310-878E-1053C32EDB0D}"
+      DTS:From="Package\Read Each Excel File to Database"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 3"
+      DTS:To="Package\Copy Files to Archive" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 4]"
+      DTS:CreationName=""
+      DTS:DTSID="{5BCDC209-7A65-43D5-A51D-3754E86BE1F2}"
+      DTS:From="Package\Copy Files to Archive"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 4"
+      DTS:To="Package\Remove original" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="183,42"
+          Id="Package\Copy Files to Archive"
+          TopLeft="725,199" />
+        <NodeLayout
+          Size="170,42"
+          Id="Package\Create File Name"
+          TopLeft="54,302" />
+        <NodeLayout
+          Size="170,42"
+          Id="Package\Delete records older than 30 days"
+          TopLeft="56,209" />
+        <NodeLayout
+          Size="177,42"
+          Id="Package\Read Each Excel File to Database\Import Escheatment"
+          TopLeft="75.5,11.5" />
+        <NodeLayout
+          Size="179,42"
+          Id="Package\Read Each Excel File to Database\Remove empty rows"
+          TopLeft="77,79" />
+        <NodeLayout
+          Size="175,42"
+          Id="Package\Read Each Excel File to Database\Write Data from Sql"
+          TopLeft="77,160" />
+        <EdgeLayout
+          Id="Package\Read Each Excel File to Database.PrecedenceConstraints[Constraint]"
+          TopLeft="165.25,53.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,25.5"
+              Start="0,0"
+              End="0,18">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,18" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Read Each Excel File to Database.PrecedenceConstraints[Constraint 1]"
+          TopLeft="165.5,121">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,39"
+              Start="0,0"
+              End="0,31.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,31.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="324,243"
+          Size="324,286"
+          Id="Package\Read Each Excel File to Database"
+          TopLeft="302,97" />
+        <NodeLayout
+          Size="159,42"
+          Id="Package\Remove original"
+          TopLeft="725,309" />
+        <NodeLayout
+          Size="185,42"
+          Id="Package\Truncate Stage Table"
+          TopLeft="59,143" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="140,251">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,51"
+              Start="0,0"
+              End="0,43.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,43.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="151.5,185">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-10.5,24"
+              Start="0,0"
+              End="-10.5,16.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,8" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,8"
+                    Point2="0,12"
+                    Point3="-4,12" />
+                  <mssgle:LineSegment
+                    End="-6.5,12" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-6.5,12"
+                    Point2="-10.5,12"
+                    Point3="-10.5,16" />
+                  <mssgle:LineSegment
+                    End="-10.5,16.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 2]"
+          TopLeft="224,323">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="78,-83"
+              Start="0,0"
+              End="70.5,-83">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="35,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="35,0"
+                    Point2="39,0"
+                    Point3="39,-4" />
+                  <mssgle:LineSegment
+                    End="39,-79" />
+                  <mssgle:CubicBezierSegment
+                    Point1="39,-79"
+                    Point2="39,-83"
+                    Point3="43,-83" />
+                  <mssgle:LineSegment
+                    End="70.5,-83" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 3]"
+          TopLeft="626,240">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="99,-20"
+              Start="0,0"
+              End="91.5,-20">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="45.5,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="45.5,0"
+                    Point2="49.5,0"
+                    Point3="49.5,-4" />
+                  <mssgle:LineSegment
+                    End="49.5,-16" />
+                  <mssgle:CubicBezierSegment
+                    Point1="49.5,-16"
+                    Point2="49.5,-20"
+                    Point3="53.5,-20" />
+                  <mssgle:LineSegment
+                    End="91.5,-20" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 4]"
+          TopLeft="816.5,241">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-12,68"
+              Start="0,0"
+              End="-12,60.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,30" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,30"
+                    Point2="0,34"
+                    Point3="-4,34" />
+                  <mssgle:LineSegment
+                    End="-8,34" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-8,34"
+                    Point2="-12,34"
+                    Point3="-12,38" />
+                  <mssgle:LineSegment
+                    End="-12,60.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Read Each Excel File to Database\Import Escheatment">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="177,42"
+          Id="Package\Read Each Excel File to Database\Import Escheatment\OLE DB Destination"
+          TopLeft="143,279" />
+        <NodeLayout
+          Size="161,42"
+          Id="Package\Read Each Excel File to Database\Import Escheatment\Data Conversion"
+          TopLeft="150,181" />
+        <NodeLayout
+          Size="144,42"
+          Id="Package\Read Each Excel File to Database\Import Escheatment\Excel Source"
+          TopLeft="144,100" />
+        <EdgeLayout
+          Id="Package\Read Each Excel File to Database\Import Escheatment.Paths[Data Conversion Output]"
+          TopLeft="231,223">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,56"
+              Start="0,0"
+              End="0,48.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,48.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Read Each Excel File to Database\Import Escheatment.Paths[Excel Source Output]"
+          TopLeft="216,142">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="14.5,39"
+              Start="0,0"
+              End="14.5,31.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,15.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,15.5"
+                    Point2="0,19.5"
+                    Point3="4,19.5" />
+                  <mssgle:LineSegment
+                    End="10.5,19.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="10.5,19.5"
+                    Point2="14.5,19.5"
+                    Point3="14.5,23.5" />
+                  <mssgle:LineSegment
+                    End="14.5,31.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Read Each Excel File to Database\Import Escheatment\OLE DB Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Read Each Excel File to Database\Import Escheatment\Excel Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\Read Each Excel File to Database\Write Data from Sql">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="157,42"
+          Id="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source"
+          TopLeft="195,58" />
+        <NodeLayout
+          Size="176,42"
+          Id="Package\Read Each Excel File to Database\Write Data from Sql\Flat File Destination"
+          TopLeft="201,152" />
+        <EdgeLayout
+          Id="Package\Read Each Excel File to Database\Write Data from Sql.Paths[OLE DB Source Output]"
+          TopLeft="273.5,100">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="15.5,52"
+              Start="0,0"
+              End="15.5,44.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,22" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,22"
+                    Point2="0,26"
+                    Point3="4,26" />
+                  <mssgle:LineSegment
+                    End="11.5,26" />
+                  <mssgle:CubicBezierSegment
+                    Point1="11.5,26"
+                    Point2="15.5,26"
+                    Point3="15.5,30" />
+                  <mssgle:LineSegment
+                    End="15.5,44.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
