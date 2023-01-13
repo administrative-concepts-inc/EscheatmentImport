@@ -7,12 +7,12 @@
   DTS:CreatorName="ACI\rmerckel"
   DTS:DTSID="{0F49C884-4811-4A55-BDF0-E7E1CE53C30E}"
   DTS:ExecutableType="Microsoft.Package"
-  DTS:LastModifiedProductVersion="15.0.2000.180"
+  DTS:LastModifiedProductVersion="16.0.948.0"
   DTS:LocaleID="1033"
   DTS:ObjectName="Package"
   DTS:PackageType="5"
-  DTS:VersionBuild="71"
-  DTS:VersionGUID="{2482A3F5-A784-4505-A77B-36B252856149}">
+  DTS:VersionBuild="111"
+  DTS:VersionGUID="{4086F147-0DB1-44BC-93C5-81DA24A5A93C}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -80,7 +80,7 @@ RIGHT("0" + (DT_STR,4,1252)DATEPART( "ss" , @[System::StartTime]   ), 2) + ".csv
           DTS:RowDelimiter=""
           DTS:TextQualifier="_x003C_none_x003E_"
           DTS:CodePage="1252"
-          DTS:ConnectionString="_2022_12_01_09_43_22.csv">
+          DTS:ConnectionString="1_2023_01_13_08_56_41.csv">
           <DTS:FlatFileColumns>
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -214,6 +214,17 @@ RIGHT("0" + (DT_STR,4,1252)DATEPART( "ss" , @[System::StartTime]   ), 2) + ".csv
       </DTS:ObjectData>
     </DTS:ConnectionManager>
     <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[SMTP Connection Manager]"
+      DTS:CreationName="SMTP"
+      DTS:DTSID="{B5C6D9A6-0B9F-4D10-857F-027A5884202B}"
+      DTS:ObjectName="SMTP Connection Manager">
+      <DTS:ObjectData>
+        <SmtpConnectionManager
+          ConnectionString="SmtpServer=aciexch2010.visit-aci.com;UseWindowsAuthentication=True;EnableSsl=False;"
+          ConnectByProxy="False" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
       DTS:refId="Package.ConnectionManagers[Test]"
       DTS:CreationName="FILE"
       DTS:DTSID="{B71D5B58-DE4E-4158-8011-1296A1996818}"
@@ -228,12 +239,23 @@ RIGHT("0" + (DT_STR,4,1252)DATEPART( "ss" , @[System::StartTime]   ), 2) + ".csv
   <DTS:Variables>
     <DTS:Variable
       DTS:CreationName=""
+      DTS:DTSID="{9B5A84A0-78C5-4CD4-96CC-593725B03046}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="@[User::ArchiveLocation] +  @[User::FileName] +  @[User::DateProcessed]"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="ArchiveFileName">
+      <DTS:VariableValue
+        DTS:DataType="8">\\acifs2\shared\Escheatment\Archive\1</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
       DTS:DTSID="{A6F04DDB-B2A2-4B9E-91DF-9A86507216DB}"
       DTS:IncludeInDebugDump="2345"
       DTS:Namespace="User"
       DTS:ObjectName="ArchiveLocation">
       <DTS:VariableValue
-        DTS:DataType="8">L:\Escheatment\Archive</DTS:VariableValue>
+        DTS:DataType="8">\\acifs2\shared\Escheatment\Archive\</DTS:VariableValue>
     </DTS:Variable>
     <DTS:Variable
       DTS:CreationName=""
@@ -241,6 +263,16 @@ RIGHT("0" + (DT_STR,4,1252)DATEPART( "ss" , @[System::StartTime]   ), 2) + ".csv
       DTS:IncludeInDebugDump="2345"
       DTS:Namespace="User"
       DTS:ObjectName="CSVFileName">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{388FB13F-46BF-4040-9C42-C8B2D0276988}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="DateProcessed">
       <DTS:VariableValue
         DTS:DataType="8"
         xml:space="preserve"></DTS:VariableValue>
@@ -256,47 +288,76 @@ RIGHT("0" + (DT_STR,4,1252)DATEPART( "ss" , @[System::StartTime]   ), 2) + ".csv
     </DTS:Variable>
     <DTS:Variable
       DTS:CreationName=""
+      DTS:DTSID="{7BB4F69D-4ED8-4F6C-B5D4-75D0D0615ED9}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="Error_ClaimNotExist">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{534B4851-ACC9-4AA1-8F9F-D8853FEB7104}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="Error_DuplicateClaims">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{19B02C1E-C03E-4DF9-A555-62B95C08F6D6}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="Error_InvalidClaimNumbers">
+      <DTS:VariableValue
+        DTS:DataType="8">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
       DTS:DTSID="{53B3593F-6D32-4DA7-8AEB-F61ACFFD33AF}"
       DTS:EvaluateAsExpression="True"
-      DTS:Expression="&quot;\\\\acifs2\\Escheatment\\Archive\\&quot;"
+      DTS:Expression="&quot;\\\\acifs2\\shared\\Escheatment\\Archive\\&quot;"
       DTS:IncludeInDebugDump="2345"
       DTS:Namespace="User"
       DTS:ObjectName="ExcelArchiveFolderPath">
       <DTS:VariableValue
-        DTS:DataType="8">\\acifs2\Escheatment\Archive\</DTS:VariableValue>
+        DTS:DataType="8">\\acifs2\shared\Escheatment\Archive\</DTS:VariableValue>
     </DTS:Variable>
     <DTS:Variable
       DTS:CreationName=""
       DTS:DTSID="{085E9FE6-8C4D-439B-A062-CE78FB36C85D}"
       DTS:EvaluateAsExpression="True"
-      DTS:Expression="&quot;\\\\acifs2\\Escheatment\\Errors\\&quot;"
+      DTS:Expression="&quot;\\\\acifs2\\shared\\Escheatment\\Errors\\&quot;"
       DTS:IncludeInDebugDump="2345"
       DTS:Namespace="User"
       DTS:ObjectName="ExcelErrorFolder">
       <DTS:VariableValue
-        DTS:DataType="8">\\acifs2\Escheatment\Errors\</DTS:VariableValue>
+        DTS:DataType="8">\\acifs2\shared\Escheatment\Errors\</DTS:VariableValue>
     </DTS:Variable>
     <DTS:Variable
       DTS:CreationName=""
       DTS:DTSID="{77A1E6A5-8953-4E11-B682-1BC97ACE8E59}"
       DTS:EvaluateAsExpression="True"
-      DTS:Expression="&quot;\\\\acifs2\\Escheatment\\Test\\&quot;"
+      DTS:Expression="&quot;\\\\acifs2\\shared\\Escheatment\\Test\\&quot;"
       DTS:IncludeInDebugDump="2345"
       DTS:Namespace="User"
       DTS:ObjectName="ExcelImportFolderPath">
       <DTS:VariableValue
-        DTS:DataType="8">\\acifs2\Escheatment\Test\</DTS:VariableValue>
+        DTS:DataType="8">\\acifs2\shared\Escheatment\Test\</DTS:VariableValue>
     </DTS:Variable>
     <DTS:Variable
       DTS:CreationName=""
       DTS:DTSID="{492479B0-CD3E-48C7-9F46-60206871B6C9}"
       DTS:EvaluateAsExpression="True"
-      DTS:Expression="&quot;\\\\acifs2\\Escheatment\\Processing\\&quot;"
+      DTS:Expression="&quot;\\\\acifs2\\shared\\Escheatment\\Processing\\&quot;"
       DTS:IncludeInDebugDump="2345"
       DTS:Namespace="User"
       DTS:ObjectName="ExcelProcessFolderPath">
       <DTS:VariableValue
-        DTS:DataType="8">\\acifs2\Escheatment\Processing\</DTS:VariableValue>
+        DTS:DataType="8">\\acifs2\shared\Escheatment\Processing\</DTS:VariableValue>
     </DTS:Variable>
     <DTS:Variable
       DTS:CreationName=""
@@ -305,8 +366,7 @@ RIGHT("0" + (DT_STR,4,1252)DATEPART( "ss" , @[System::StartTime]   ), 2) + ".csv
       DTS:Namespace="User"
       DTS:ObjectName="FileName">
       <DTS:VariableValue
-        DTS:DataType="8"
-        xml:space="preserve"></DTS:VariableValue>
+        DTS:DataType="8">1</DTS:VariableValue>
     </DTS:Variable>
     <DTS:Variable
       DTS:CreationName=""
@@ -325,7 +385,7 @@ RIGHT("0" + (DT_STR,4,1252)DATEPART( "ss" , @[System::StartTime]   ), 2) + ".csv
       DTS:Namespace="User"
       DTS:ObjectName="ProdFilesFolder">
       <DTS:VariableValue
-        DTS:DataType="8">L:\Escheatment\Test</DTS:VariableValue>
+        DTS:DataType="8">\\acifs2\shared\Escheatment\Test</DTS:VariableValue>
     </DTS:Variable>
     <DTS:Variable
       DTS:CreationName=""
@@ -339,12 +399,13 @@ RIGHT("0" + (DT_STR,4,1252)DATEPART( "ss" , @[System::StartTime]   ), 2) + ".csv
     <DTS:Variable
       DTS:CreationName=""
       DTS:DTSID="{6FB0C656-987B-425E-9703-CE3A32C3B553}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="@[User::ExcelImportFolderPath] +  @[User::FileName]"
       DTS:IncludeInDebugDump="2345"
       DTS:Namespace="User"
       DTS:ObjectName="SourceFileName">
       <DTS:VariableValue
-        DTS:DataType="8"
-        xml:space="preserve"></DTS:VariableValue>
+        DTS:DataType="8">\\acifs2\shared\Escheatment\Test\1</DTS:VariableValue>
     </DTS:Variable>
     <DTS:Variable
       DTS:CreationName=""
@@ -363,31 +424,106 @@ RIGHT("0" + (DT_STR,4,1252)DATEPART( "ss" , @[System::StartTime]   ), 2) + ".csv
       DTS:Namespace="User"
       DTS:ObjectName="TableName">
       <DTS:VariableValue
-        DTS:DataType="8">dbo.Enr_Stage_Data</DTS:VariableValue>
+        DTS:DataType="11">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{6EC92FEC-6726-4446-882A-7859DC47D415}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="TableName_Staging">
+      <DTS:VariableValue
+        DTS:DataType="8">[ACIrobot].[dbo].[Enr_Escheatment_test2_Staging]</DTS:VariableValue>
     </DTS:Variable>
   </DTS:Variables>
   <DTS:Executables>
     <DTS:Executable
-      DTS:refId="Package\Copy Files to Archive"
-      DTS:CreationName="Microsoft.FileSystemTask"
-      DTS:DelayValidation="True"
-      DTS:Description="File System Task"
-      DTS:DTSID="{CAA820C2-617F-43A1-8955-F1CC0781F1B6}"
-      DTS:ExecutableType="Microsoft.FileSystemTask"
+      DTS:refId="Package\Archive Files"
+      DTS:CreationName="STOCK:FOREACHLOOP"
+      DTS:Description="Foreach Loop Container"
+      DTS:DTSID="{91799fa8-c5cb-4885-a33a-18c0652d8ec9}"
+      DTS:ExecutableType="STOCK:FOREACHLOOP"
       DTS:LocaleID="-1"
-      DTS:ObjectName="Copy Files to Archive"
-      DTS:TaskContact="File System Task;Microsoft Corporation; SQL Server 2019; © 2019 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-      DTS:ThreadHint="0">
+      DTS:ObjectName="Archive Files">
+      <DTS:ForEachEnumerator
+        DTS:CreationName="Microsoft.ForEachFileEnumerator"
+        DTS:DTSID="{864521f6-678c-4441-bc91-c2b519609130}"
+        DTS:ObjectName="{540B68A6-B186-41E5-A213-C3999334D041}">
+        <DTS:ObjectData>
+          <ForEachFileEnumeratorProperties>
+            <FEFEProperty
+              Folder="\\acifs2\shared\Escheatment\Test" />
+            <FEFEProperty
+              FileSpec="*.xls" />
+            <FEFEProperty
+              FileNameRetrievalType="1" />
+            <FEFEProperty
+              Recurse="0" />
+          </ForEachFileEnumeratorProperties>
+        </DTS:ObjectData>
+      </DTS:ForEachEnumerator>
       <DTS:Variables />
-      <DTS:ObjectData>
-        <FileSystemData
-          TaskOperationType="CopyDirectory"
-          TaskOverwriteDestFile="True"
-          TaskSourcePath="User::ProdFilesFolder"
-          TaskIsSourceVariable="True"
-          TaskDestinationPath="User::ArchiveLocation"
-          TaskIsDestinationVariable="True" />
-      </DTS:ObjectData>
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Archive Files\Get Date Stamp"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{129B34EA-EC29-46A1-86AB-921B4771534A}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Get Date Stamp"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{2483A934-3461-4BF4-B40E-60BD135A4A8F}"
+              SQLTask:SqlStatementSource="SELECT '_' + format(getdate(),'yyyyMMddHHmmssffff') + '.xls' As DateStamp"
+              SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ResultBinding
+                SQLTask:ResultName="DateStamp"
+                SQLTask:DtsVariableName="User::DateProcessed" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Archive Files\Move To Archive"
+          DTS:CreationName="Microsoft.FileSystemTask"
+          DTS:Description="File System Task"
+          DTS:DTSID="{7D9D2B0D-5E96-40E4-AAFA-03F70337B0AC}"
+          DTS:ExecutableType="Microsoft.FileSystemTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Move To Archive"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <FileSystemData
+              TaskOperationType="MoveFile"
+              TaskOverwriteDestFile="True"
+              TaskSourcePath="User::SourceFileName"
+              TaskIsSourceVariable="True"
+              TaskDestinationPath="User::ArchiveFileName"
+              TaskIsDestinationVariable="True" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+      <DTS:PrecedenceConstraints>
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Archive Files.PrecedenceConstraints[Constraint]"
+          DTS:CreationName=""
+          DTS:DTSID="{8CB75C15-F5D1-4452-86AD-699C58C46436}"
+          DTS:From="Package\Archive Files\Get Date Stamp"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint"
+          DTS:To="Package\Archive Files\Move To Archive" />
+      </DTS:PrecedenceConstraints>
+      <DTS:ForEachVariableMappings>
+        <DTS:ForEachVariableMapping
+          DTS:CreationName=""
+          DTS:DTSID="{B59115F3-56E5-4E71-BF61-51D961C05DFA}"
+          DTS:ObjectName="{B59115F3-56E5-4E71-BF61-51D961C05DFA}"
+          DTS:ValueIndex="0"
+          DTS:VariableName="User::FileName" />
+      </DTS:ForEachVariableMappings>
     </DTS:Executable>
     <DTS:Executable
       DTS:refId="Package\Create File Name"
@@ -412,20 +548,47 @@ RIGHT("0" + (DT_STR,4,1252)DATEPART( "ss" , @[System::StartTime]   ), 2) + ".csv
       </DTS:ObjectData>
     </DTS:Executable>
     <DTS:Executable
-      DTS:refId="Package\Delete records older than 30 days"
+      DTS:refId="Package\Delete records older than 365 days"
       DTS:CreationName="Microsoft.ExecuteSQLTask"
       DTS:Description="Execute SQL Task"
       DTS:DTSID="{8DC060B9-C312-4CF3-9706-FFFB5929E2B7}"
       DTS:ExecutableType="Microsoft.ExecuteSQLTask"
       DTS:LocaleID="-1"
-      DTS:ObjectName="Delete records older than 30 days"
+      DTS:ObjectName="Delete records older than 365 days"
       DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2019; © 2019 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
       DTS:ThreadHint="0">
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
           SQLTask:Connection="{2483A934-3461-4BF4-B40E-60BD135A4A8F}"
-          SQLTask:SqlStatementSource="DELETE FROM [Enr_Stage_Data]&#xA;  WHERE [RecordCreateDate] &lt; DATEADD(day, -30, GETDATE())" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          SQLTask:SqlStatementSource="DELETE FROM [ACIrobot].[dbo].[Enr_Escheatment_test2_history]&#xA;WHERE [RecordCreateDate] &lt; GetDate()-365" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Insert Into Enr_Queue test2"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{8D4B3F78-4C42-46BE-87EA-A3F1F757DE64}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Insert Into Enr_Queue test2"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{2483A934-3461-4BF4-B40E-60BD135A4A8F}"
+          SQLTask:SqlStatementSource="EXEC [dbo].[Insert_Eascheatment_test2]"
+          SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ResultBinding
+            SQLTask:ResultName="InvalidClaim"
+            SQLTask:DtsVariableName="User::Error_InvalidClaimNumbers" />
+          <SQLTask:ResultBinding
+            SQLTask:ResultName="ClaimNotExist"
+            SQLTask:DtsVariableName="User::Error_ClaimNotExist" />
+          <SQLTask:ResultBinding
+            SQLTask:ResultName="DuplicateClaims"
+            SQLTask:DtsVariableName="User::Error_DuplicateClaims" />
+        </SQLTask:SqlTaskData>
       </DTS:ObjectData>
     </DTS:Executable>
     <DTS:Executable
@@ -443,7 +606,7 @@ RIGHT("0" + (DT_STR,4,1252)DATEPART( "ss" , @[System::StartTime]   ), 2) + ".csv
         <DTS:ObjectData>
           <ForEachFileEnumeratorProperties>
             <FEFEProperty
-              Folder="L:\Escheatment\Test" />
+              Folder="\\acifs2\shared\Escheatment\Test" />
             <FEFEProperty
               FileSpec="*.xls" />
             <FEFEProperty
@@ -878,7 +1041,7 @@ RIGHT("0" + (DT_STR,4,1252)DATEPART( "ss" , @[System::StartTime]   ), 2) + ".csv
                       dataType="System.String"
                       description="The SQL command to be executed."
                       name="SqlCommand"
-                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
                     <property
                       dataType="System.String"
                       description="The variable that contains the SQL command to be executed."
@@ -1192,7 +1355,7 @@ RIGHT("0" + (DT_STR,4,1252)DATEPART( "ss" , @[System::StartTime]   ), 2) + ".csv
                     <property
                       dataType="System.String"
                       description="Specifies the name of the database object used to open a rowset."
-                      name="OpenRowset">[dbo].[Enr_Stage_Data]</property>
+                      name="OpenRowset">[dbo].[Enr_Escheatment_test2_Staging]</property>
                     <property
                       dataType="System.String"
                       description="Specifies the variable that contains the name of the database object used to open a rowset."
@@ -1201,7 +1364,7 @@ RIGHT("0" + (DT_STR,4,1252)DATEPART( "ss" , @[System::StartTime]   ), 2) + ".csv
                       dataType="System.String"
                       description="The SQL command to be executed."
                       name="SqlCommand"
-                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
                     <property
                       dataType="System.Int32"
                       description="Specifies the column code page to use when code page information is unavailable from the data source."
@@ -1413,6 +1576,16 @@ RIGHT("0" + (DT_STR,4,1252)DATEPART( "ss" , @[System::StartTime]   ), 2) + ".csv
                           refId="Package\Read Each Excel File to Database\Import Escheatment\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[RecordCreateDate]"
                           dataType="dbDate"
                           name="RecordCreateDate" />
+                        <externalMetadataColumn
+                          refId="Package\Read Each Excel File to Database\Import Escheatment\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[EnrSeq]"
+                          dataType="i4"
+                          name="EnrSeq" />
+                        <externalMetadataColumn
+                          refId="Package\Read Each Excel File to Database\Import Escheatment\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[DepCode]"
+                          codePage="1252"
+                          dataType="str"
+                          length="1"
+                          name="DepCode" />
                       </externalMetadataColumns>
                     </input>
                   </inputs>
@@ -1457,740 +1630,76 @@ RIGHT("0" + (DT_STR,4,1252)DATEPART( "ss" , @[System::StartTime]   ), 2) + ".csv
             </pipeline>
           </DTS:ObjectData>
         </DTS:Executable>
-        <DTS:Executable
-          DTS:refId="Package\Read Each Excel File to Database\Remove empty rows"
-          DTS:CreationName="Microsoft.ExecuteSQLTask"
-          DTS:Description="Execute SQL Task"
-          DTS:DTSID="{E077034C-5BD3-42E7-B951-5F31B7D0E53E}"
-          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
-          DTS:LocaleID="-1"
-          DTS:ObjectName="Remove empty rows"
-          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2019; © 2019 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-          DTS:ThreadHint="0">
-          <DTS:Variables />
-          <DTS:ObjectData>
-            <SQLTask:SqlTaskData
-              SQLTask:Connection="{2483A934-3461-4BF4-B40E-60BD135A4A8F}"
-              SQLTask:SqlStatementSource="Delete ec&#xA;  From Enr_Stage_Data ec (NOLOCK)&#xA;  Where LEN(ISNULL(LTRIM(RTRIM(ec.CheckNumber) ), '') ) = 0&#xA;&#x9;and LEN(ISNULL(LTRIM(RTRIM(ec.Payee) ), '') ) = 0&#xA;&#x9;and LEN(ISNULL(LTRIM(RTRIM(ec.CheckDate) ), '') ) = 0&#xA;&#x9;and LEN(ISNULL(LTRIM(RTRIM(ec.CheckAmount) ), '') ) = 0&#xA;&#x9;and LEN(ISNULL(LTRIM(RTRIM(ec.ClaimNumber) ), '') ) = 0&#xA;&#x9;and LEN(ISNULL(LTRIM(RTRIM(ec.CheckAddress1) ), '') ) = 0&#xA;&#x9;and LEN(ISNULL(LTRIM(RTRIM(ec.CheckAddress2) ), '') ) = 0&#xA;&#x9;and LEN(ISNULL(LTRIM(RTRIM(ec.CheckCity) ), '') ) = 0&#xA;&#x9;and LEN(ISNULL(LTRIM(RTRIM(ec.CheckState) ), '') ) = 0&#xA;&#x9;and LEN(ISNULL(LTRIM(RTRIM(ec.CheckZip) ), '') ) = 0&#xA;&#x9;and LEN(ISNULL(LTRIM(RTRIM(ec.QLNotes) ), '') ) = 0&#xA;&#x9;and LEN(ISNULL(LTRIM(RTRIM(ec.RecordCreateDate) ), '') ) = 0" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
-          </DTS:ObjectData>
-        </DTS:Executable>
-        <DTS:Executable
-          DTS:refId="Package\Read Each Excel File to Database\Write Data from Sql"
-          DTS:CreationName="Microsoft.Pipeline"
-          DTS:Description="Data Flow Task"
-          DTS:DTSID="{B9800152-88AB-410C-8C1B-CC804E41913E}"
-          DTS:ExecutableType="Microsoft.Pipeline"
-          DTS:LocaleID="-1"
-          DTS:ObjectName="Write Data from Sql"
-          DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
-          <DTS:Variables />
-          <DTS:ObjectData>
-            <pipeline
-              version="1">
-              <components>
-                <component
-                  refId="Package\Read Each Excel File to Database\Write Data from Sql\Flat File Destination"
-                  componentClassID="Microsoft.FlatFileDestination"
-                  contactInfo="Flat File Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
-                  description="Flat File Destination"
-                  localeId="1033"
-                  name="Flat File Destination"
-                  version="1">
-                  <properties>
-                    <property
-                      dataType="System.Boolean"
-                      description="Specifies whether the data will overwrite or append to the destination file."
-                      name="Overwrite">true</property>
-                    <property
-                      dataType="System.Null"
-                      description="Specifies the text to write to the destination file before any data is written."
-                      expressionType="Notify"
-                      name="Header" />
-                    <property
-                      dataType="System.Boolean"
-                      description="When text qualifier is enabled, specifies whether the text qualifier in the data written to the destination file will be escaped or not."
-                      name="EscapeQualifier">false</property>
-                  </properties>
-                  <connections>
-                    <connection
-                      refId="Package\Read Each Excel File to Database\Write Data from Sql\Flat File Destination.Connections[FlatFileConnection]"
-                      connectionManagerID="Package.ConnectionManagers[Destination file Conn]"
-                      connectionManagerRefId="Package.ConnectionManagers[Destination file Conn]"
-                      name="FlatFileConnection" />
-                  </connections>
-                  <inputs>
-                    <input
-                      refId="Package\Read Each Excel File to Database\Write Data from Sql\Flat File Destination.Inputs[Flat File Destination Input]"
-                      hasSideEffects="true"
-                      name="Flat File Destination Input">
-                      <inputColumns>
-                        <inputColumn
-                          refId="Package\Read Each Excel File to Database\Write Data from Sql\Flat File Destination.Inputs[Flat File Destination Input].Columns[ID]"
-                          cachedDataType="i4"
-                          cachedName="ID"
-                          externalMetadataColumnId="Package\Read Each Excel File to Database\Write Data from Sql\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[ID]"
-                          lineageId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Output].Columns[ID]" />
-                        <inputColumn
-                          refId="Package\Read Each Excel File to Database\Write Data from Sql\Flat File Destination.Inputs[Flat File Destination Input].Columns[CheckNumber]"
-                          cachedCodepage="1252"
-                          cachedDataType="str"
-                          cachedLength="25"
-                          cachedName="CheckNumber"
-                          externalMetadataColumnId="Package\Read Each Excel File to Database\Write Data from Sql\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[CheckNumber]"
-                          lineageId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Output].Columns[CheckNumber]" />
-                        <inputColumn
-                          refId="Package\Read Each Excel File to Database\Write Data from Sql\Flat File Destination.Inputs[Flat File Destination Input].Columns[Payee]"
-                          cachedCodepage="1252"
-                          cachedDataType="str"
-                          cachedLength="55"
-                          cachedName="Payee"
-                          externalMetadataColumnId="Package\Read Each Excel File to Database\Write Data from Sql\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Payee]"
-                          lineageId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Output].Columns[Payee]" />
-                        <inputColumn
-                          refId="Package\Read Each Excel File to Database\Write Data from Sql\Flat File Destination.Inputs[Flat File Destination Input].Columns[CheckDate]"
-                          cachedCodepage="1252"
-                          cachedDataType="str"
-                          cachedLength="15"
-                          cachedName="CheckDate"
-                          externalMetadataColumnId="Package\Read Each Excel File to Database\Write Data from Sql\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[CheckDate]"
-                          lineageId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Output].Columns[CheckDate]" />
-                        <inputColumn
-                          refId="Package\Read Each Excel File to Database\Write Data from Sql\Flat File Destination.Inputs[Flat File Destination Input].Columns[CheckAmount]"
-                          cachedCodepage="1252"
-                          cachedDataType="str"
-                          cachedLength="10"
-                          cachedName="CheckAmount"
-                          externalMetadataColumnId="Package\Read Each Excel File to Database\Write Data from Sql\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[CheckAmount]"
-                          lineageId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Output].Columns[CheckAmount]" />
-                        <inputColumn
-                          refId="Package\Read Each Excel File to Database\Write Data from Sql\Flat File Destination.Inputs[Flat File Destination Input].Columns[ClaimNumber]"
-                          cachedCodepage="1252"
-                          cachedDataType="str"
-                          cachedLength="15"
-                          cachedName="ClaimNumber"
-                          externalMetadataColumnId="Package\Read Each Excel File to Database\Write Data from Sql\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[ClaimNumber]"
-                          lineageId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Output].Columns[ClaimNumber]" />
-                        <inputColumn
-                          refId="Package\Read Each Excel File to Database\Write Data from Sql\Flat File Destination.Inputs[Flat File Destination Input].Columns[CheckAddress1]"
-                          cachedCodepage="1252"
-                          cachedDataType="str"
-                          cachedLength="55"
-                          cachedName="CheckAddress1"
-                          externalMetadataColumnId="Package\Read Each Excel File to Database\Write Data from Sql\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[CheckAddress1]"
-                          lineageId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Output].Columns[CheckAddress1]" />
-                        <inputColumn
-                          refId="Package\Read Each Excel File to Database\Write Data from Sql\Flat File Destination.Inputs[Flat File Destination Input].Columns[CheckAddress2]"
-                          cachedCodepage="1252"
-                          cachedDataType="str"
-                          cachedLength="55"
-                          cachedName="CheckAddress2"
-                          externalMetadataColumnId="Package\Read Each Excel File to Database\Write Data from Sql\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[CheckAddress2]"
-                          lineageId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Output].Columns[CheckAddress2]" />
-                        <inputColumn
-                          refId="Package\Read Each Excel File to Database\Write Data from Sql\Flat File Destination.Inputs[Flat File Destination Input].Columns[CheckCity]"
-                          cachedCodepage="1252"
-                          cachedDataType="str"
-                          cachedLength="50"
-                          cachedName="CheckCity"
-                          externalMetadataColumnId="Package\Read Each Excel File to Database\Write Data from Sql\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[CheckCity]"
-                          lineageId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Output].Columns[CheckCity]" />
-                        <inputColumn
-                          refId="Package\Read Each Excel File to Database\Write Data from Sql\Flat File Destination.Inputs[Flat File Destination Input].Columns[CheckState]"
-                          cachedCodepage="1252"
-                          cachedDataType="str"
-                          cachedLength="2"
-                          cachedName="CheckState"
-                          externalMetadataColumnId="Package\Read Each Excel File to Database\Write Data from Sql\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[CheckState]"
-                          lineageId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Output].Columns[CheckState]" />
-                        <inputColumn
-                          refId="Package\Read Each Excel File to Database\Write Data from Sql\Flat File Destination.Inputs[Flat File Destination Input].Columns[CheckZip]"
-                          cachedCodepage="1252"
-                          cachedDataType="str"
-                          cachedLength="10"
-                          cachedName="CheckZip"
-                          externalMetadataColumnId="Package\Read Each Excel File to Database\Write Data from Sql\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[CheckZip]"
-                          lineageId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Output].Columns[CheckZip]" />
-                        <inputColumn
-                          refId="Package\Read Each Excel File to Database\Write Data from Sql\Flat File Destination.Inputs[Flat File Destination Input].Columns[QLNotes]"
-                          cachedCodepage="1252"
-                          cachedDataType="str"
-                          cachedLength="150"
-                          cachedName="QLNotes"
-                          externalMetadataColumnId="Package\Read Each Excel File to Database\Write Data from Sql\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[QLNotes]"
-                          lineageId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Output].Columns[QLNotes]" />
-                        <inputColumn
-                          refId="Package\Read Each Excel File to Database\Write Data from Sql\Flat File Destination.Inputs[Flat File Destination Input].Columns[RecordCreateDate]"
-                          cachedDataType="dbDate"
-                          cachedName="RecordCreateDate"
-                          externalMetadataColumnId="Package\Read Each Excel File to Database\Write Data from Sql\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[RecordCreateDate]"
-                          lineageId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Output].Columns[RecordCreateDate]" />
-                      </inputColumns>
-                      <externalMetadataColumns
-                        isUsed="True">
-                        <externalMetadataColumn
-                          refId="Package\Read Each Excel File to Database\Write Data from Sql\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[ID]"
-                          dataType="i4"
-                          name="ID" />
-                        <externalMetadataColumn
-                          refId="Package\Read Each Excel File to Database\Write Data from Sql\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[CheckNumber]"
-                          codePage="1252"
-                          dataType="str"
-                          length="25"
-                          name="CheckNumber" />
-                        <externalMetadataColumn
-                          refId="Package\Read Each Excel File to Database\Write Data from Sql\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Payee]"
-                          codePage="1252"
-                          dataType="str"
-                          length="55"
-                          name="Payee" />
-                        <externalMetadataColumn
-                          refId="Package\Read Each Excel File to Database\Write Data from Sql\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[CheckDate]"
-                          codePage="1252"
-                          dataType="str"
-                          length="15"
-                          name="CheckDate" />
-                        <externalMetadataColumn
-                          refId="Package\Read Each Excel File to Database\Write Data from Sql\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[CheckAmount]"
-                          codePage="1252"
-                          dataType="str"
-                          length="10"
-                          name="CheckAmount" />
-                        <externalMetadataColumn
-                          refId="Package\Read Each Excel File to Database\Write Data from Sql\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[ClaimNumber]"
-                          codePage="1252"
-                          dataType="str"
-                          length="15"
-                          name="ClaimNumber" />
-                        <externalMetadataColumn
-                          refId="Package\Read Each Excel File to Database\Write Data from Sql\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[CheckAddress1]"
-                          codePage="1252"
-                          dataType="str"
-                          length="55"
-                          name="CheckAddress1" />
-                        <externalMetadataColumn
-                          refId="Package\Read Each Excel File to Database\Write Data from Sql\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[CheckAddress2]"
-                          codePage="1252"
-                          dataType="str"
-                          length="55"
-                          name="CheckAddress2" />
-                        <externalMetadataColumn
-                          refId="Package\Read Each Excel File to Database\Write Data from Sql\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[CheckCity]"
-                          codePage="1252"
-                          dataType="str"
-                          length="50"
-                          name="CheckCity" />
-                        <externalMetadataColumn
-                          refId="Package\Read Each Excel File to Database\Write Data from Sql\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[CheckState]"
-                          codePage="1252"
-                          dataType="str"
-                          length="2"
-                          name="CheckState" />
-                        <externalMetadataColumn
-                          refId="Package\Read Each Excel File to Database\Write Data from Sql\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[CheckZip]"
-                          codePage="1252"
-                          dataType="str"
-                          length="10"
-                          name="CheckZip" />
-                        <externalMetadataColumn
-                          refId="Package\Read Each Excel File to Database\Write Data from Sql\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[QLNotes]"
-                          codePage="1252"
-                          dataType="str"
-                          length="150"
-                          name="QLNotes" />
-                        <externalMetadataColumn
-                          refId="Package\Read Each Excel File to Database\Write Data from Sql\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[RecordCreateDate]"
-                          dataType="dbDate"
-                          name="RecordCreateDate" />
-                      </externalMetadataColumns>
-                    </input>
-                  </inputs>
-                </component>
-                <component
-                  refId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source"
-                  componentClassID="Microsoft.OLEDBSource"
-                  contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
-                  description="OLE DB Source"
-                  name="OLE DB Source"
-                  usesDispositions="true"
-                  version="7">
-                  <properties>
-                    <property
-                      dataType="System.Int32"
-                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
-                      name="CommandTimeout">0</property>
-                    <property
-                      dataType="System.String"
-                      description="Specifies the name of the database object used to open a rowset."
-                      name="OpenRowset">[dbo].[Enr_Stage_Data]</property>
-                    <property
-                      dataType="System.String"
-                      description="Specifies the variable that contains the name of the database object used to open a rowset."
-                      name="OpenRowsetVariable"></property>
-                    <property
-                      dataType="System.String"
-                      description="The SQL command to be executed."
-                      name="SqlCommand"
-                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
-                    <property
-                      dataType="System.String"
-                      description="The variable that contains the SQL command to be executed."
-                      name="SqlCommandVariable"></property>
-                    <property
-                      dataType="System.Int32"
-                      description="Specifies the column code page to use when code page information is unavailable from the data source."
-                      name="DefaultCodePage">1252</property>
-                    <property
-                      dataType="System.Boolean"
-                      description="Forces the use of the DefaultCodePage property value when describing character data."
-                      name="AlwaysUseDefaultCodePage">false</property>
-                    <property
-                      dataType="System.Int32"
-                      description="Specifies the mode used to access the database."
-                      name="AccessMode"
-                      typeConverter="AccessMode">0</property>
-                    <property
-                      dataType="System.String"
-                      description="The mappings between the parameters in the SQL command and variables."
-                      name="ParameterMapping"></property>
-                  </properties>
-                  <connections>
-                    <connection
-                      refId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Connections[OleDbConnection]"
-                      connectionManagerID="Package.ConnectionManagers[acisql2012.ACIrobot]"
-                      connectionManagerRefId="Package.ConnectionManagers[acisql2012.ACIrobot]"
-                      description="The OLE DB runtime connection used to access the database."
-                      name="OleDbConnection" />
-                  </connections>
-                  <outputs>
-                    <output
-                      refId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Output]"
-                      name="OLE DB Source Output">
-                      <outputColumns>
-                        <outputColumn
-                          refId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Output].Columns[ID]"
-                          dataType="i4"
-                          errorOrTruncationOperation="Conversion"
-                          errorRowDisposition="FailComponent"
-                          externalMetadataColumnId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ID]"
-                          lineageId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Output].Columns[ID]"
-                          name="ID"
-                          truncationRowDisposition="FailComponent" />
-                        <outputColumn
-                          refId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Output].Columns[CheckNumber]"
-                          codePage="1252"
-                          dataType="str"
-                          errorOrTruncationOperation="Conversion"
-                          errorRowDisposition="FailComponent"
-                          externalMetadataColumnId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[CheckNumber]"
-                          length="25"
-                          lineageId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Output].Columns[CheckNumber]"
-                          name="CheckNumber"
-                          truncationRowDisposition="FailComponent" />
-                        <outputColumn
-                          refId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Output].Columns[Payee]"
-                          codePage="1252"
-                          dataType="str"
-                          errorOrTruncationOperation="Conversion"
-                          errorRowDisposition="FailComponent"
-                          externalMetadataColumnId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Payee]"
-                          length="55"
-                          lineageId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Output].Columns[Payee]"
-                          name="Payee"
-                          truncationRowDisposition="FailComponent" />
-                        <outputColumn
-                          refId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Output].Columns[CheckDate]"
-                          codePage="1252"
-                          dataType="str"
-                          errorOrTruncationOperation="Conversion"
-                          errorRowDisposition="FailComponent"
-                          externalMetadataColumnId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[CheckDate]"
-                          length="15"
-                          lineageId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Output].Columns[CheckDate]"
-                          name="CheckDate"
-                          truncationRowDisposition="FailComponent" />
-                        <outputColumn
-                          refId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Output].Columns[CheckAmount]"
-                          codePage="1252"
-                          dataType="str"
-                          errorOrTruncationOperation="Conversion"
-                          errorRowDisposition="FailComponent"
-                          externalMetadataColumnId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[CheckAmount]"
-                          length="10"
-                          lineageId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Output].Columns[CheckAmount]"
-                          name="CheckAmount"
-                          truncationRowDisposition="FailComponent" />
-                        <outputColumn
-                          refId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Output].Columns[ClaimNumber]"
-                          codePage="1252"
-                          dataType="str"
-                          errorOrTruncationOperation="Conversion"
-                          errorRowDisposition="FailComponent"
-                          externalMetadataColumnId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ClaimNumber]"
-                          length="15"
-                          lineageId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Output].Columns[ClaimNumber]"
-                          name="ClaimNumber"
-                          truncationRowDisposition="FailComponent" />
-                        <outputColumn
-                          refId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Output].Columns[CheckAddress1]"
-                          codePage="1252"
-                          dataType="str"
-                          errorOrTruncationOperation="Conversion"
-                          errorRowDisposition="FailComponent"
-                          externalMetadataColumnId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[CheckAddress1]"
-                          length="55"
-                          lineageId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Output].Columns[CheckAddress1]"
-                          name="CheckAddress1"
-                          truncationRowDisposition="FailComponent" />
-                        <outputColumn
-                          refId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Output].Columns[CheckAddress2]"
-                          codePage="1252"
-                          dataType="str"
-                          errorOrTruncationOperation="Conversion"
-                          errorRowDisposition="FailComponent"
-                          externalMetadataColumnId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[CheckAddress2]"
-                          length="55"
-                          lineageId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Output].Columns[CheckAddress2]"
-                          name="CheckAddress2"
-                          truncationRowDisposition="FailComponent" />
-                        <outputColumn
-                          refId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Output].Columns[CheckCity]"
-                          codePage="1252"
-                          dataType="str"
-                          errorOrTruncationOperation="Conversion"
-                          errorRowDisposition="FailComponent"
-                          externalMetadataColumnId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[CheckCity]"
-                          length="50"
-                          lineageId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Output].Columns[CheckCity]"
-                          name="CheckCity"
-                          truncationRowDisposition="FailComponent" />
-                        <outputColumn
-                          refId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Output].Columns[CheckState]"
-                          codePage="1252"
-                          dataType="str"
-                          errorOrTruncationOperation="Conversion"
-                          errorRowDisposition="FailComponent"
-                          externalMetadataColumnId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[CheckState]"
-                          length="2"
-                          lineageId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Output].Columns[CheckState]"
-                          name="CheckState"
-                          truncationRowDisposition="FailComponent" />
-                        <outputColumn
-                          refId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Output].Columns[CheckZip]"
-                          codePage="1252"
-                          dataType="str"
-                          errorOrTruncationOperation="Conversion"
-                          errorRowDisposition="FailComponent"
-                          externalMetadataColumnId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[CheckZip]"
-                          length="10"
-                          lineageId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Output].Columns[CheckZip]"
-                          name="CheckZip"
-                          truncationRowDisposition="FailComponent" />
-                        <outputColumn
-                          refId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Output].Columns[QLNotes]"
-                          codePage="1252"
-                          dataType="str"
-                          errorOrTruncationOperation="Conversion"
-                          errorRowDisposition="FailComponent"
-                          externalMetadataColumnId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[QLNotes]"
-                          length="150"
-                          lineageId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Output].Columns[QLNotes]"
-                          name="QLNotes"
-                          truncationRowDisposition="FailComponent" />
-                        <outputColumn
-                          refId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Output].Columns[RecordCreateDate]"
-                          dataType="dbDate"
-                          errorOrTruncationOperation="Conversion"
-                          errorRowDisposition="FailComponent"
-                          externalMetadataColumnId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[RecordCreateDate]"
-                          lineageId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Output].Columns[RecordCreateDate]"
-                          name="RecordCreateDate"
-                          truncationRowDisposition="FailComponent" />
-                        <outputColumn
-                          refId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Output].Columns[EnrSeq]"
-                          dataType="i4"
-                          errorOrTruncationOperation="Conversion"
-                          errorRowDisposition="FailComponent"
-                          externalMetadataColumnId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[EnrSeq]"
-                          lineageId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Output].Columns[EnrSeq]"
-                          name="EnrSeq"
-                          truncationRowDisposition="FailComponent" />
-                        <outputColumn
-                          refId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Output].Columns[DepCode]"
-                          codePage="1252"
-                          dataType="str"
-                          errorOrTruncationOperation="Conversion"
-                          errorRowDisposition="FailComponent"
-                          externalMetadataColumnId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[DepCode]"
-                          length="1"
-                          lineageId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Output].Columns[DepCode]"
-                          name="DepCode"
-                          truncationRowDisposition="FailComponent" />
-                      </outputColumns>
-                      <externalMetadataColumns
-                        isUsed="True">
-                        <externalMetadataColumn
-                          refId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ID]"
-                          dataType="i4"
-                          name="ID" />
-                        <externalMetadataColumn
-                          refId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[CheckNumber]"
-                          codePage="1252"
-                          dataType="str"
-                          length="25"
-                          name="CheckNumber" />
-                        <externalMetadataColumn
-                          refId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Payee]"
-                          codePage="1252"
-                          dataType="str"
-                          length="55"
-                          name="Payee" />
-                        <externalMetadataColumn
-                          refId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[CheckDate]"
-                          codePage="1252"
-                          dataType="str"
-                          length="15"
-                          name="CheckDate" />
-                        <externalMetadataColumn
-                          refId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[CheckAmount]"
-                          codePage="1252"
-                          dataType="str"
-                          length="10"
-                          name="CheckAmount" />
-                        <externalMetadataColumn
-                          refId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ClaimNumber]"
-                          codePage="1252"
-                          dataType="str"
-                          length="15"
-                          name="ClaimNumber" />
-                        <externalMetadataColumn
-                          refId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[CheckAddress1]"
-                          codePage="1252"
-                          dataType="str"
-                          length="55"
-                          name="CheckAddress1" />
-                        <externalMetadataColumn
-                          refId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[CheckAddress2]"
-                          codePage="1252"
-                          dataType="str"
-                          length="55"
-                          name="CheckAddress2" />
-                        <externalMetadataColumn
-                          refId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[CheckCity]"
-                          codePage="1252"
-                          dataType="str"
-                          length="50"
-                          name="CheckCity" />
-                        <externalMetadataColumn
-                          refId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[CheckState]"
-                          codePage="1252"
-                          dataType="str"
-                          length="2"
-                          name="CheckState" />
-                        <externalMetadataColumn
-                          refId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[CheckZip]"
-                          codePage="1252"
-                          dataType="str"
-                          length="10"
-                          name="CheckZip" />
-                        <externalMetadataColumn
-                          refId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[QLNotes]"
-                          codePage="1252"
-                          dataType="str"
-                          length="150"
-                          name="QLNotes" />
-                        <externalMetadataColumn
-                          refId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[RecordCreateDate]"
-                          dataType="dbDate"
-                          name="RecordCreateDate" />
-                        <externalMetadataColumn
-                          refId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[EnrSeq]"
-                          dataType="i4"
-                          name="EnrSeq" />
-                        <externalMetadataColumn
-                          refId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[DepCode]"
-                          codePage="1252"
-                          dataType="str"
-                          length="1"
-                          name="DepCode" />
-                      </externalMetadataColumns>
-                    </output>
-                    <output
-                      refId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Error Output]"
-                      isErrorOut="true"
-                      name="OLE DB Source Error Output">
-                      <outputColumns>
-                        <outputColumn
-                          refId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ID]"
-                          dataType="i4"
-                          lineageId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ID]"
-                          name="ID" />
-                        <outputColumn
-                          refId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[CheckNumber]"
-                          codePage="1252"
-                          dataType="str"
-                          length="25"
-                          lineageId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[CheckNumber]"
-                          name="CheckNumber" />
-                        <outputColumn
-                          refId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Payee]"
-                          codePage="1252"
-                          dataType="str"
-                          length="55"
-                          lineageId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Payee]"
-                          name="Payee" />
-                        <outputColumn
-                          refId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[CheckDate]"
-                          codePage="1252"
-                          dataType="str"
-                          length="15"
-                          lineageId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[CheckDate]"
-                          name="CheckDate" />
-                        <outputColumn
-                          refId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[CheckAmount]"
-                          codePage="1252"
-                          dataType="str"
-                          length="10"
-                          lineageId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[CheckAmount]"
-                          name="CheckAmount" />
-                        <outputColumn
-                          refId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ClaimNumber]"
-                          codePage="1252"
-                          dataType="str"
-                          length="15"
-                          lineageId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ClaimNumber]"
-                          name="ClaimNumber" />
-                        <outputColumn
-                          refId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[CheckAddress1]"
-                          codePage="1252"
-                          dataType="str"
-                          length="55"
-                          lineageId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[CheckAddress1]"
-                          name="CheckAddress1" />
-                        <outputColumn
-                          refId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[CheckAddress2]"
-                          codePage="1252"
-                          dataType="str"
-                          length="55"
-                          lineageId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[CheckAddress2]"
-                          name="CheckAddress2" />
-                        <outputColumn
-                          refId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[CheckCity]"
-                          codePage="1252"
-                          dataType="str"
-                          length="50"
-                          lineageId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[CheckCity]"
-                          name="CheckCity" />
-                        <outputColumn
-                          refId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[CheckState]"
-                          codePage="1252"
-                          dataType="str"
-                          length="2"
-                          lineageId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[CheckState]"
-                          name="CheckState" />
-                        <outputColumn
-                          refId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[CheckZip]"
-                          codePage="1252"
-                          dataType="str"
-                          length="10"
-                          lineageId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[CheckZip]"
-                          name="CheckZip" />
-                        <outputColumn
-                          refId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[QLNotes]"
-                          codePage="1252"
-                          dataType="str"
-                          length="150"
-                          lineageId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[QLNotes]"
-                          name="QLNotes" />
-                        <outputColumn
-                          refId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[RecordCreateDate]"
-                          dataType="dbDate"
-                          lineageId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[RecordCreateDate]"
-                          name="RecordCreateDate" />
-                        <outputColumn
-                          refId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[EnrSeq]"
-                          dataType="i4"
-                          lineageId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[EnrSeq]"
-                          name="EnrSeq" />
-                        <outputColumn
-                          refId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[DepCode]"
-                          codePage="1252"
-                          dataType="str"
-                          length="1"
-                          lineageId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[DepCode]"
-                          name="DepCode" />
-                        <outputColumn
-                          refId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
-                          dataType="i4"
-                          lineageId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
-                          name="ErrorCode"
-                          specialFlags="1" />
-                        <outputColumn
-                          refId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
-                          dataType="i4"
-                          lineageId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
-                          name="ErrorColumn"
-                          specialFlags="2" />
-                      </outputColumns>
-                      <externalMetadataColumns />
-                    </output>
-                  </outputs>
-                </component>
-              </components>
-              <paths>
-                <path
-                  refId="Package\Read Each Excel File to Database\Write Data from Sql.Paths[OLE DB Source Output]"
-                  endId="Package\Read Each Excel File to Database\Write Data from Sql\Flat File Destination.Inputs[Flat File Destination Input]"
-                  name="OLE DB Source Output"
-                  startId="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source.Outputs[OLE DB Source Output]" />
-              </paths>
-            </pipeline>
-          </DTS:ObjectData>
-        </DTS:Executable>
       </DTS:Executables>
-      <DTS:PrecedenceConstraints>
-        <DTS:PrecedenceConstraint
-          DTS:refId="Package\Read Each Excel File to Database.PrecedenceConstraints[Constraint]"
-          DTS:CreationName=""
-          DTS:DTSID="{686795C9-4AA3-4313-9055-B2208EBF60B3}"
-          DTS:From="Package\Read Each Excel File to Database\Import Escheatment"
-          DTS:LogicalAnd="True"
-          DTS:ObjectName="Constraint"
-          DTS:To="Package\Read Each Excel File to Database\Remove empty rows" />
-        <DTS:PrecedenceConstraint
-          DTS:refId="Package\Read Each Excel File to Database.PrecedenceConstraints[Constraint 1]"
-          DTS:CreationName=""
-          DTS:DTSID="{D1966D24-187D-489C-8ABB-6D0F1202471A}"
-          DTS:From="Package\Read Each Excel File to Database\Remove empty rows"
-          DTS:LogicalAnd="True"
-          DTS:ObjectName="Constraint 1"
-          DTS:To="Package\Read Each Excel File to Database\Write Data from Sql" />
-      </DTS:PrecedenceConstraints>
       <DTS:ForEachVariableMappings>
         <DTS:ForEachVariableMapping
           DTS:CreationName=""
-          DTS:DTSID="{F83437E6-A7CC-45DE-8C6C-3037D7117EE4}"
-          DTS:ObjectName="{F83437E6-A7CC-45DE-8C6C-3037D7117EE4}"
+          DTS:DTSID="{2991D56E-E1D0-4002-B0AB-7E599C14F33D}"
+          DTS:ObjectName="{2991D56E-E1D0-4002-B0AB-7E599C14F33D}"
           DTS:ValueIndex="0"
           DTS:VariableName="User::FileName" />
       </DTS:ForEachVariableMappings>
     </DTS:Executable>
     <DTS:Executable
-      DTS:refId="Package\Remove original"
-      DTS:CreationName="Microsoft.FileSystemTask"
-      DTS:DelayValidation="True"
-      DTS:Description="File System Task"
-      DTS:DTSID="{47F7861E-437A-4557-A906-DAFACE9E0DE9}"
-      DTS:ExecutableType="Microsoft.FileSystemTask"
+      DTS:refId="Package\Remove empty rows"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{E077034C-5BD3-42E7-B951-5F31B7D0E53E}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
       DTS:LocaleID="-1"
-      DTS:ObjectName="Remove original"
-      DTS:TaskContact="File System Task;Microsoft Corporation; SQL Server 2019; © 2019 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ObjectName="Remove empty rows"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2019; © 2019 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
       DTS:ThreadHint="0">
       <DTS:Variables />
       <DTS:ObjectData>
-        <FileSystemData
-          TaskOperationType="DeleteDirectoryContent"
-          TaskSourcePath="User::ProdFilesFolder"
-          TaskIsSourceVariable="True" />
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{2483A934-3461-4BF4-B40E-60BD135A4A8F}"
+          SQLTask:SqlStatementSource="Delete ec&#xA;  From [ACIrobot].[dbo].[Enr_Escheatment_test2_Staging] ec (NOLOCK)&#xA;  Where LEN(ISNULL(LTRIM(RTRIM(ec.CheckNumber) ), '') ) = 0&#xA;&#x9;and LEN(ISNULL(LTRIM(RTRIM(ec.Payee) ), '') ) = 0&#xA;&#x9;and LEN(ISNULL(LTRIM(RTRIM(ec.CheckDate) ), '') ) = 0&#xA;&#x9;and LEN(ISNULL(LTRIM(RTRIM(ec.CheckAmount) ), '') ) = 0&#xA;&#x9;and LEN(ISNULL(LTRIM(RTRIM(ec.ClaimNumber) ), '') ) = 0&#xA;&#x9;and LEN(ISNULL(LTRIM(RTRIM(ec.CheckAddress1) ), '') ) = 0&#xA;&#x9;and LEN(ISNULL(LTRIM(RTRIM(ec.CheckAddress2) ), '') ) = 0&#xA;&#x9;and LEN(ISNULL(LTRIM(RTRIM(ec.CheckCity) ), '') ) = 0&#xA;&#x9;and LEN(ISNULL(LTRIM(RTRIM(ec.CheckState) ), '') ) = 0&#xA;&#x9;and LEN(ISNULL(LTRIM(RTRIM(ec.CheckZip) ), '') ) = 0&#xA;&#x9;and LEN(ISNULL(LTRIM(RTRIM(ec.QLNotes) ), '') ) = 0&#xA;&#x9;and LEN(ISNULL(LTRIM(RTRIM(ec.RecordCreateDate) ), '') ) = 0" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Send Email on Success"
+      DTS:CreationName="Microsoft.SendMailTask"
+      DTS:Description="Send Mail Task"
+      DTS:DTSID="{ac15b51e-2391-464c-9f38-d453211126b1}"
+      DTS:ExecutableType="Microsoft.SendMailTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Send Email on Success"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SendMailTask:SendMailTaskData
+          SendMailTask:SMTPServer="{B5C6D9A6-0B9F-4D10-857F-027A5884202B}"
+          SendMailTask:From="ahouse@acitpa.com"
+          SendMailTask:To="ahouse@acitpa.com"
+          SendMailTask:CC="ahouse@acitpa.com"
+          SendMailTask:Subject="Escheatment Processing Successful"
+          SendMailTask:MessageSource="Invalid Claim Numbers (Need to be in #####-# format): 0Claims That Do Not Exist:Duplicate Claims or Claim Already Processed:" xmlns:SendMailTask="www.microsoft.com/sqlserver/dts/tasks/sendmailtask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Send Mail On Error"
+      DTS:CreationName="Microsoft.SendMailTask"
+      DTS:Description="Send Mail Task"
+      DTS:DTSID="{7166E0A5-F15E-49E9-9E51-C797BC0A3E11}"
+      DTS:ExecutableType="Microsoft.SendMailTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Send Mail On Error"
+      DTS:ThreadHint="1">
+      <DTS:Variables />
+      <DTS:PropertyExpression
+        DTS:Name="MessageSource">"Invalid Claim Numbers (Need to be in #####-# format): " +  @[User::Error_InvalidClaimNumbers] + 
+"Claims That Do Not Exist:" +  @[User::Error_ClaimNotExist] +
+"Duplicate Claims or Claim Already Processed:" +  @[User::Error_DuplicateClaims]</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <SendMailTask:SendMailTaskData
+          SendMailTask:SMTPServer="{B5C6D9A6-0B9F-4D10-857F-027A5884202B}"
+          SendMailTask:From="ahouse@acitpa.com"
+          SendMailTask:To="ahouse@acitpa.com"
+          SendMailTask:CC="ahouse@acitpa.com"
+          SendMailTask:Subject="Escheatment Processing Error"
+          SendMailTask:Priority="High"
+          SendMailTask:MessageSource="Invalid Claim Numbers (Need to be in #####-# format): 0Claims That Do Not Exist:Duplicate Claims or Claim Already Processed:" xmlns:SendMailTask="www.microsoft.com/sqlserver/dts/tasks/sendmailtask" />
       </DTS:ObjectData>
     </DTS:Executable>
     <DTS:Executable
@@ -2207,7 +1716,7 @@ RIGHT("0" + (DT_STR,4,1252)DATEPART( "ss" , @[System::StartTime]   ), 2) + ".csv
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
           SQLTask:Connection="{2483A934-3461-4BF4-B40E-60BD135A4A8F}"
-          SQLTask:SqlStatementSource="TRUNCATE TABLE Enr_Stage_Data" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          SQLTask:SqlStatementSource="TRUNCATE TABLE [ACIrobot].[dbo].[Enr_Escheatment_test2_Staging]" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
       </DTS:ObjectData>
     </DTS:Executable>
   </DTS:Executables>
@@ -2216,7 +1725,7 @@ RIGHT("0" + (DT_STR,4,1252)DATEPART( "ss" , @[System::StartTime]   ), 2) + ".csv
       DTS:refId="Package.PrecedenceConstraints[Constraint]"
       DTS:CreationName=""
       DTS:DTSID="{EDB34AFB-C632-4C4F-81C0-D3730F0DAECC}"
-      DTS:From="Package\Delete records older than 30 days"
+      DTS:From="Package\Delete records older than 365 days"
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint"
       DTS:To="Package\Create File Name" />
@@ -2227,7 +1736,7 @@ RIGHT("0" + (DT_STR,4,1252)DATEPART( "ss" , @[System::StartTime]   ), 2) + ".csv
       DTS:From="Package\Truncate Stage Table"
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint 1"
-      DTS:To="Package\Delete records older than 30 days" />
+      DTS:To="Package\Delete records older than 365 days" />
     <DTS:PrecedenceConstraint
       DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
       DTS:CreationName=""
@@ -2239,19 +1748,47 @@ RIGHT("0" + (DT_STR,4,1252)DATEPART( "ss" , @[System::StartTime]   ), 2) + ".csv
     <DTS:PrecedenceConstraint
       DTS:refId="Package.PrecedenceConstraints[Constraint 3]"
       DTS:CreationName=""
-      DTS:DTSID="{E9F04CE9-A808-4310-878E-1053C32EDB0D}"
+      DTS:DTSID="{9DFFB332-28DE-470F-A7B1-CFF445C2F63B}"
       DTS:From="Package\Read Each Excel File to Database"
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint 3"
-      DTS:To="Package\Copy Files to Archive" />
+      DTS:To="Package\Remove empty rows" />
     <DTS:PrecedenceConstraint
       DTS:refId="Package.PrecedenceConstraints[Constraint 4]"
       DTS:CreationName=""
-      DTS:DTSID="{5BCDC209-7A65-43D5-A51D-3754E86BE1F2}"
-      DTS:From="Package\Copy Files to Archive"
+      DTS:DTSID="{D7155418-6A5F-4723-AC04-E9D1FE603AED}"
+      DTS:From="Package\Archive Files"
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint 4"
-      DTS:To="Package\Remove original" />
+      DTS:To="Package\Send Email on Success" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 5]"
+      DTS:CreationName=""
+      DTS:DTSID="{47FE06D4-FE98-4EBB-B9F6-927DDCEC0D06}"
+      DTS:EvalOp="3"
+      DTS:Expression="@[User::Error_InvalidClaimNumbers] == &quot;0&quot; &amp;&amp;  @[User::Error_ClaimNotExist] == &quot;&quot; &amp;&amp;  @[User::Error_DuplicateClaims] == &quot;&quot;"
+      DTS:From="Package\Insert Into Enr_Queue test2"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 5"
+      DTS:To="Package\Archive Files" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 6]"
+      DTS:CreationName=""
+      DTS:DTSID="{90FA34BF-F9EC-45D6-99C8-E3390D75C6B4}"
+      DTS:EvalOp="3"
+      DTS:Expression="@[User::Error_InvalidClaimNumbers] !=&quot;0&quot; ||  @[User::Error_ClaimNotExist] != &quot;&quot; ||  @[User::Error_DuplicateClaims] != &quot;&quot;"
+      DTS:From="Package\Insert Into Enr_Queue test2"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 6"
+      DTS:To="Package\Send Mail On Error" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 7]"
+      DTS:CreationName=""
+      DTS:DTSID="{239C2FF5-DF02-4370-8981-903FD8838223}"
+      DTS:From="Package\Remove empty rows"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 7"
+      DTS:To="Package\Insert Into Enr_Queue test2" />
   </DTS:PrecedenceConstraints>
   <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
 <!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
@@ -2264,67 +1801,29 @@ RIGHT("0" + (DT_STR,4,1252)DATEPART( "ss" , @[System::StartTime]   ), 2) + ".csv
     design-time-name="Package">
     <LayoutInfo>
       <GraphLayout
-        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        Capacity="32" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
-          Size="183,42"
-          Id="Package\Copy Files to Archive"
-          TopLeft="725,199" />
+          Size="158,42"
+          Id="Package\Archive Files\Get Date Stamp"
+          TopLeft="47,12" />
         <NodeLayout
-          Size="170,42"
-          Id="Package\Create File Name"
-          TopLeft="54,302" />
-        <NodeLayout
-          Size="170,42"
-          Id="Package\Delete records older than 30 days"
-          TopLeft="56,209" />
-        <NodeLayout
-          Size="177,42"
-          Id="Package\Read Each Excel File to Database\Import Escheatment"
-          TopLeft="75.5,11.5" />
-        <NodeLayout
-          Size="179,42"
-          Id="Package\Read Each Excel File to Database\Remove empty rows"
-          TopLeft="77,79" />
-        <NodeLayout
-          Size="175,42"
-          Id="Package\Read Each Excel File to Database\Write Data from Sql"
-          TopLeft="77,160" />
+          Size="161,42"
+          Id="Package\Archive Files\Move To Archive"
+          TopLeft="52,90" />
         <EdgeLayout
-          Id="Package\Read Each Excel File to Database.PrecedenceConstraints[Constraint]"
-          TopLeft="165.25,53.5">
+          Id="Package\Archive Files.PrecedenceConstraints[Constraint]"
+          TopLeft="129.25,54">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,25.5"
+              EndConnector="0,36"
               Start="0,0"
-              End="0,18">
+              End="0,28.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,18" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Read Each Excel File to Database.PrecedenceConstraints[Constraint 1]"
-          TopLeft="165.5,121">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,39"
-              Start="0,0"
-              End="0,31.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,31.5" />
+                    End="0,28.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -2336,32 +1835,59 @@ RIGHT("0" + (DT_STR,4,1252)DATEPART( "ss" , @[System::StartTime]   ), 2) + ".csv
         <ContainerLayout
           HeaderHeight="43"
           IsExpanded="True"
-          PanelSize="324,243"
-          Size="324,286"
-          Id="Package\Read Each Excel File to Database"
-          TopLeft="302,97" />
+          PanelSize="322,197"
+          Size="322,240"
+          Id="Package\Archive Files"
+          TopLeft="610,291" />
         <NodeLayout
-          Size="159,42"
-          Id="Package\Remove original"
-          TopLeft="725,309" />
+          Size="170,42"
+          Id="Package\Create File Name"
+          TopLeft="33,241" />
+        <NodeLayout
+          Size="250,42"
+          Id="Package\Delete records older than 365 days"
+          TopLeft="0,114" />
+        <NodeLayout
+          Size="214,42"
+          Id="Package\Insert Into Enr_Queue test2"
+          TopLeft="614,166" />
+        <NodeLayout
+          Size="177,42"
+          Id="Package\Read Each Excel File to Database\Import Escheatment"
+          TopLeft="75.5,11.5" />
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="322,197"
+          Size="322,240"
+          Id="Package\Read Each Excel File to Database"
+          TopLeft="265,48" />
+        <NodeLayout
+          Size="179,42"
+          Id="Package\Remove empty rows"
+          TopLeft="624,45" />
+        <NodeLayout
+          Size="173,42"
+          Id="Package\Send Mail On Error"
+          TopLeft="973,172" />
         <NodeLayout
           Size="185,42"
           Id="Package\Truncate Stage Table"
-          TopLeft="59,143" />
+          TopLeft="30,37" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint]"
-          TopLeft="140,251">
+          TopLeft="121.5,156">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,51"
+              EndConnector="0,85"
               Start="0,0"
-              End="0,43.5">
+              End="0,77.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,43.5" />
+                    End="0,77.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -2372,30 +1898,18 @@ RIGHT("0" + (DT_STR,4,1252)DATEPART( "ss" , @[System::StartTime]   ), 2) + ".csv
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 1]"
-          TopLeft="151.5,185">
+          TopLeft="123.75,79">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="-10.5,24"
+              EndConnector="0,35"
               Start="0,0"
-              End="-10.5,16.5">
+              End="0,27.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,8" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,8"
-                    Point2="0,12"
-                    Point3="-4,12" />
-                  <mssgle:LineSegment
-                    End="-6.5,12" />
-                  <mssgle:CubicBezierSegment
-                    Point1="-6.5,12"
-                    Point2="-10.5,12"
-                    Point3="-10.5,16" />
-                  <mssgle:LineSegment
-                    End="-10.5,16.5" />
+                    End="0,27.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -2406,30 +1920,30 @@ RIGHT("0" + (DT_STR,4,1252)DATEPART( "ss" , @[System::StartTime]   ), 2) + ".csv
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 2]"
-          TopLeft="224,323">
+          TopLeft="203,262">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="78,-83"
+              EndConnector="62,-94"
               Start="0,0"
-              End="70.5,-83">
+              End="54.5,-94">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="35,0" />
+                    End="27,0" />
                   <mssgle:CubicBezierSegment
-                    Point1="35,0"
-                    Point2="39,0"
-                    Point3="39,-4" />
+                    Point1="27,0"
+                    Point2="31,0"
+                    Point3="31,-4" />
                   <mssgle:LineSegment
-                    End="39,-79" />
+                    End="31,-90" />
                   <mssgle:CubicBezierSegment
-                    Point1="39,-79"
-                    Point2="39,-83"
-                    Point3="43,-83" />
+                    Point1="31,-90"
+                    Point2="31,-94"
+                    Point3="35,-94" />
                   <mssgle:LineSegment
-                    End="70.5,-83" />
+                    End="54.5,-94" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -2440,30 +1954,30 @@ RIGHT("0" + (DT_STR,4,1252)DATEPART( "ss" , @[System::StartTime]   ), 2) + ".csv
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 3]"
-          TopLeft="626,240">
+          TopLeft="587,168">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="99,-20"
+              EndConnector="37,-102"
               Start="0,0"
-              End="91.5,-20">
+              End="29.5,-102">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="45.5,0" />
+                    End="14.5,0" />
                   <mssgle:CubicBezierSegment
-                    Point1="45.5,0"
-                    Point2="49.5,0"
-                    Point3="49.5,-4" />
+                    Point1="14.5,0"
+                    Point2="18.5,0"
+                    Point3="18.5,-4" />
                   <mssgle:LineSegment
-                    End="49.5,-16" />
+                    End="18.5,-98" />
                   <mssgle:CubicBezierSegment
-                    Point1="49.5,-16"
-                    Point2="49.5,-20"
-                    Point3="53.5,-20" />
+                    Point1="18.5,-98"
+                    Point2="18.5,-102"
+                    Point3="22.5,-102" />
                   <mssgle:LineSegment
-                    End="91.5,-20" />
+                    End="29.5,-102" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -2473,31 +1987,105 @@ RIGHT("0" + (DT_STR,4,1252)DATEPART( "ss" , @[System::StartTime]   ), 2) + ".csv
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
-          Id="Package.PrecedenceConstraints[Constraint 4]"
-          TopLeft="816.5,241">
+          Id="Package.PrecedenceConstraints[Constraint 5]"
+          TopLeft="721,208">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="-12,68"
+              EndConnector="50,83"
               Start="0,0"
-              End="-12,60.5">
+              End="50,75.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,30" />
+                    End="0,37.5" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,30"
-                    Point2="0,34"
-                    Point3="-4,34" />
+                    Point1="0,37.5"
+                    Point2="0,41.5"
+                    Point3="4,41.5" />
                   <mssgle:LineSegment
-                    End="-8,34" />
+                    End="46,41.5" />
                   <mssgle:CubicBezierSegment
-                    Point1="-8,34"
-                    Point2="-12,34"
-                    Point3="-12,38" />
+                    Point1="46,41.5"
+                    Point2="50,41.5"
+                    Point3="50,45.5" />
                   <mssgle:LineSegment
-                    End="-12,60.5" />
+                    End="50,75.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="17,46.5,16,16"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 6]"
+          TopLeft="828,190">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="145,0"
+              Start="0,0"
+              End="137.5,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="137.5,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="60.75,5,16,16"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 7]"
+          TopLeft="717.25,87">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,79"
+              Start="0,0"
+              End="0,71.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,71.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="195,42"
+          Id="Package\Send Email on Success"
+          TopLeft="987,389" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 4]"
+          TopLeft="932,410.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="55,0"
+              Start="0,0"
+              End="47.5,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="47.5,0" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -2526,30 +2114,6 @@ RIGHT("0" + (DT_STR,4,1252)DATEPART( "ss" , @[System::StartTime]   ), 2) + ".csv
           Size="144,42"
           Id="Package\Read Each Excel File to Database\Import Escheatment\Excel Source"
           TopLeft="144,100" />
-        <EdgeLayout
-          Id="Package\Read Each Excel File to Database\Import Escheatment.Paths[Data Conversion Output]"
-          TopLeft="231,223">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,56"
-              Start="0,0"
-              End="0,48.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,48.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
         <EdgeLayout
           Id="Package\Read Each Excel File to Database\Import Escheatment.Paths[Excel Source Output]"
           TopLeft="216,142">
@@ -2586,6 +2150,30 @@ RIGHT("0" + (DT_STR,4,1252)DATEPART( "ss" , @[System::StartTime]   ), 2) + ".csv
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Read Each Excel File to Database\Import Escheatment.Paths[Data Conversion Output]"
+          TopLeft="231,223">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,56"
+              Start="0,0"
+              End="0,48.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,48.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
       </GraphLayout>
     </LayoutInfo>
   </TaskHost>
@@ -2604,69 +2192,6 @@ RIGHT("0" + (DT_STR,4,1252)DATEPART( "ss" , @[System::StartTime]   ), 2) + ".csv
   </PipelineComponentMetadata>
   <PipelineComponentMetadata
     design-time-name="Package\Read Each Excel File to Database\Import Escheatment\Excel Source">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q2:string">Table</Value>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <TaskHost
-    design-time-name="Package\Read Each Excel File to Database\Write Data from Sql">
-    <LayoutInfo>
-      <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
-        <NodeLayout
-          Size="157,42"
-          Id="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source"
-          TopLeft="195,58" />
-        <NodeLayout
-          Size="176,42"
-          Id="Package\Read Each Excel File to Database\Write Data from Sql\Flat File Destination"
-          TopLeft="201,152" />
-        <EdgeLayout
-          Id="Package\Read Each Excel File to Database\Write Data from Sql.Paths[OLE DB Source Output]"
-          TopLeft="273.5,100">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="15.5,52"
-              Start="0,0"
-              End="15.5,44.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,22" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,22"
-                    Point2="0,26"
-                    Point3="4,26" />
-                  <mssgle:LineSegment
-                    End="11.5,26" />
-                  <mssgle:CubicBezierSegment
-                    Point1="11.5,26"
-                    Point2="15.5,26"
-                    Point3="15.5,30" />
-                  <mssgle:LineSegment
-                    End="15.5,44.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-      </GraphLayout>
-    </LayoutInfo>
-  </TaskHost>
-  <PipelineComponentMetadata
-    design-time-name="Package\Read Each Excel File to Database\Write Data from Sql\OLE DB Source">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
