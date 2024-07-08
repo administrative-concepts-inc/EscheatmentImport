@@ -7,12 +7,12 @@
   DTS:CreatorName="ACI\rmerckel"
   DTS:DTSID="{0F49C884-4811-4A55-BDF0-E7E1CE53C30E}"
   DTS:ExecutableType="Microsoft.Package"
-  DTS:LastModifiedProductVersion="16.0.948.0"
+  DTS:LastModifiedProductVersion="16.0.5270.0"
   DTS:LocaleID="1033"
   DTS:ObjectName="Package"
   DTS:PackageType="5"
-  DTS:VersionBuild="190"
-  DTS:VersionGUID="{EC7634B1-2F0A-4447-A5D9-D38D0770E8C8}">
+  DTS:VersionBuild="206"
+  DTS:VersionGUID="{E09E01F7-A138-400C-B70C-5D8BA26AF625}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -25,7 +25,7 @@
         <DTS:ConnectionManager
           DTS:ConnectRetryCount="1"
           DTS:ConnectRetryInterval="5"
-          DTS:ConnectionString="Data Source=acisql2012;Initial Catalog=ACIrobot;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;Application Name=SSIS-Package-{2483A934-3461-4BF4-B40E-60BD135A4A8F}acisql2012.ACIrobot;" />
+          DTS:ConnectionString="Data Source=acisql2012;Initial Catalog=ACIrobot;Provider=SQLOLEDB.1;Integrated Security=SSPI;Application Name=SSIS-Package-{2483A934-3461-4BF4-B40E-60BD135A4A8F}acisql2012.ACIrobot;" />
       </DTS:ObjectData>
     </DTS:ConnectionManager>
     <DTS:ConnectionManager
@@ -80,7 +80,7 @@ RIGHT("0" + (DT_STR,4,1252)DATEPART( "ss" , @[System::StartTime]   ), 2) + ".csv
           DTS:RowDelimiter=""
           DTS:TextQualifier="_x003C_none_x003E_"
           DTS:CodePage="1252"
-          DTS:ConnectionString="_2023_06_27_08_11_53.csv">
+          DTS:ConnectionString="_2024_07_07_16_26_32.csv">
           <DTS:FlatFileColumns>
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -196,6 +196,171 @@ RIGHT("0" + (DT_STR,4,1252)DATEPART( "ss" , @[System::StartTime]   ), 2) + ".csv
               DTS:TextQualified="True"
               DTS:ObjectName="RecordCreateDate"
               DTS:DTSID="{C4B87084-0A97-4029-B6FA-64838DEC3F5F}"
+              DTS:CreationName="" />
+          </DTS:FlatFileColumns>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[ErrorFile]"
+      DTS:CreationName="FLATFILE"
+      DTS:DTSID="{DA5E6313-F30F-4E31-8033-31AC3242ECB7}"
+      DTS:ObjectName="ErrorFile">
+      <DTS:PropertyExpression
+        DTS:Name="ConnectionString">@[User::ErrorFullFileName]</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:Format="Delimited"
+          DTS:LocaleID="1033"
+          DTS:HeaderRowDelimiter="_x000D__x000A_"
+          DTS:ColumnNamesInFirstDataRow="True"
+          DTS:RowDelimiter=""
+          DTS:TextQualifier="_x0022_"
+          DTS:CodePage="1252">
+          <DTS:FlatFileColumns>
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="500"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="ErrorDescription"
+              DTS:DTSID="{FC285330-9916-44AB-B973-849F3962BF62}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="500"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="CheckNumber"
+              DTS:DTSID="{3CA80C99-0880-4573-99FC-195B122FFB50}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="500"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Payee"
+              DTS:DTSID="{C35186EC-DD25-4834-A04B-6555C9C1E70C}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="500"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="CheckDate"
+              DTS:DTSID="{16A53BBC-5FC7-4FEF-97DF-098EABAEA457}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="500"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="CheckAmount"
+              DTS:DTSID="{41EE4547-709E-41DA-A6A8-A7F521617116}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="500"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="ClaimNumber"
+              DTS:DTSID="{693C65DC-AE86-4988-93E9-E81355403006}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="500"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="CheckAddress1"
+              DTS:DTSID="{0BF8F31C-BCE9-4774-9220-88364C17759B}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="500"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="CheckAddress2"
+              DTS:DTSID="{16DD9CBC-79FE-4318-B1D4-B0C055BDBFBA}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="500"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="CheckCity"
+              DTS:DTSID="{4AC04393-82E0-421A-B1ED-082B4033F364}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="500"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="CheckState"
+              DTS:DTSID="{85E0B84C-34A6-4D1F-B5E1-674970F29780}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="500"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="CheckZip"
+              DTS:DTSID="{CA56FA5A-2651-4888-AAB9-E7DC3CDC7643}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="500"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="QLNotes"
+              DTS:DTSID="{91C995A9-91EF-4AF7-AFF5-3B10EE86FC47}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="500"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="RecordCreateDate"
+              DTS:DTSID="{C3B7CA7F-D124-481C-BAB7-8E4F2F285A5C}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="500"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="EnrSeq"
+              DTS:DTSID="{ECA0C5BF-FCAE-4342-8940-104A643948CC}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="500"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="DepCode"
+              DTS:DTSID="{921C39E6-F556-48E1-BB1A-880AD9EEA469}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x000D__x000A_"
+              DTS:MaximumWidth="500"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Filename"
+              DTS:DTSID="{E0C40BEC-0F5D-4874-BB37-A06F2CEE5F2B}"
               DTS:CreationName="" />
           </DTS:FlatFileColumns>
         </DTS:ConnectionManager>
@@ -633,6 +798,16 @@ RIGHT("0" + (DT_STR,4,1252)DATEPART( "ss" , @[System::StartTime]   ), 2) + ".csv
     </DTS:Variable>
     <DTS:Variable
       DTS:CreationName=""
+      DTS:DTSID="{2CC6317F-1DED-4BC7-BF05-589FAF1387E1}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="ErrorFullFileName">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
       DTS:DTSID="{7BB4F69D-4ED8-4F6C-B5D4-75D0D0615ED9}"
       DTS:IncludeInDebugDump="2345"
       DTS:Namespace="User"
@@ -850,6 +1025,15 @@ RIGHT("0" + (DT_STR,4,1252)DATEPART( "ss" , @[System::StartTime]   ), 2) + ".csv
         DTS:DataType="8"
         xml:space="preserve"></DTS:VariableValue>
     </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{2ADE0818-D3A2-4C03-A5C1-61B1B5015FE7}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="Variable">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
   </DTS:Variables>
   <DTS:Executables>
     <DTS:Executable
@@ -977,6 +1161,758 @@ RIGHT("0" + (DT_STR,4,1252)DATEPART( "ss" , @[System::StartTime]   ), 2) + ".csv
         <SQLTask:SqlTaskData
           SQLTask:Connection="{2483A934-3461-4BF4-B40E-60BD135A4A8F}"
           SQLTask:SqlStatementSource="DELETE FROM [ACIrobot].[dbo].[Enr_Escheatment_prod1_history]&#xA;WHERE [RecordCreateDate] &lt; GetDate()-365" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Generate Error File"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{963DEF6F-4880-447C-B285-F10B44E5E06C}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Generate Error File"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Generate Error File\Flat File Destination"
+              componentClassID="Microsoft.FlatFileDestination"
+              contactInfo="Flat File Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="Flat File Destination"
+              localeId="1033"
+              name="Flat File Destination"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Boolean"
+                  description="Specifies whether the data will overwrite or append to the destination file."
+                  name="Overwrite">true</property>
+                <property
+                  dataType="System.Null"
+                  description="Specifies the text to write to the destination file before any data is written."
+                  expressionType="Notify"
+                  name="Header" />
+                <property
+                  dataType="System.Boolean"
+                  description="When text qualifier is enabled, specifies whether the text qualifier in the data written to the destination file will be escaped or not."
+                  name="EscapeQualifier">false</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Generate Error File\Flat File Destination.Connections[FlatFileConnection]"
+                  connectionManagerID="Package.ConnectionManagers[ErrorFile]"
+                  connectionManagerRefId="Package.ConnectionManagers[ErrorFile]"
+                  name="FlatFileConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Generate Error File\Flat File Destination.Inputs[Flat File Destination Input]"
+                  hasSideEffects="true"
+                  name="Flat File Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Generate Error File\Flat File Destination.Inputs[Flat File Destination Input].Columns[ErrorDescription]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="500"
+                      cachedName="ErrorDescription"
+                      externalMetadataColumnId="Package\Generate Error File\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[ErrorDescription]"
+                      lineageId="Package\Generate Error File\OLE DB Source.Outputs[OLE DB Source Output].Columns[ErrorDescription]" />
+                    <inputColumn
+                      refId="Package\Generate Error File\Flat File Destination.Inputs[Flat File Destination Input].Columns[CheckNumber]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="25"
+                      cachedName="CheckNumber"
+                      externalMetadataColumnId="Package\Generate Error File\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[CheckNumber]"
+                      lineageId="Package\Generate Error File\OLE DB Source.Outputs[OLE DB Source Output].Columns[CheckNumber]" />
+                    <inputColumn
+                      refId="Package\Generate Error File\Flat File Destination.Inputs[Flat File Destination Input].Columns[Payee]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="55"
+                      cachedName="Payee"
+                      externalMetadataColumnId="Package\Generate Error File\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Payee]"
+                      lineageId="Package\Generate Error File\OLE DB Source.Outputs[OLE DB Source Output].Columns[Payee]" />
+                    <inputColumn
+                      refId="Package\Generate Error File\Flat File Destination.Inputs[Flat File Destination Input].Columns[CheckDate]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="15"
+                      cachedName="CheckDate"
+                      externalMetadataColumnId="Package\Generate Error File\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[CheckDate]"
+                      lineageId="Package\Generate Error File\OLE DB Source.Outputs[OLE DB Source Output].Columns[CheckDate]" />
+                    <inputColumn
+                      refId="Package\Generate Error File\Flat File Destination.Inputs[Flat File Destination Input].Columns[CheckAmount]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="10"
+                      cachedName="CheckAmount"
+                      externalMetadataColumnId="Package\Generate Error File\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[CheckAmount]"
+                      lineageId="Package\Generate Error File\OLE DB Source.Outputs[OLE DB Source Output].Columns[CheckAmount]" />
+                    <inputColumn
+                      refId="Package\Generate Error File\Flat File Destination.Inputs[Flat File Destination Input].Columns[ClaimNumber]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="15"
+                      cachedName="ClaimNumber"
+                      externalMetadataColumnId="Package\Generate Error File\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[ClaimNumber]"
+                      lineageId="Package\Generate Error File\OLE DB Source.Outputs[OLE DB Source Output].Columns[ClaimNumber]" />
+                    <inputColumn
+                      refId="Package\Generate Error File\Flat File Destination.Inputs[Flat File Destination Input].Columns[CheckAddress1]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="55"
+                      cachedName="CheckAddress1"
+                      externalMetadataColumnId="Package\Generate Error File\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[CheckAddress1]"
+                      lineageId="Package\Generate Error File\OLE DB Source.Outputs[OLE DB Source Output].Columns[CheckAddress1]" />
+                    <inputColumn
+                      refId="Package\Generate Error File\Flat File Destination.Inputs[Flat File Destination Input].Columns[CheckAddress2]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="55"
+                      cachedName="CheckAddress2"
+                      externalMetadataColumnId="Package\Generate Error File\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[CheckAddress2]"
+                      lineageId="Package\Generate Error File\OLE DB Source.Outputs[OLE DB Source Output].Columns[CheckAddress2]" />
+                    <inputColumn
+                      refId="Package\Generate Error File\Flat File Destination.Inputs[Flat File Destination Input].Columns[CheckCity]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="CheckCity"
+                      externalMetadataColumnId="Package\Generate Error File\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[CheckCity]"
+                      lineageId="Package\Generate Error File\OLE DB Source.Outputs[OLE DB Source Output].Columns[CheckCity]" />
+                    <inputColumn
+                      refId="Package\Generate Error File\Flat File Destination.Inputs[Flat File Destination Input].Columns[CheckState]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="2"
+                      cachedName="CheckState"
+                      externalMetadataColumnId="Package\Generate Error File\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[CheckState]"
+                      lineageId="Package\Generate Error File\OLE DB Source.Outputs[OLE DB Source Output].Columns[CheckState]" />
+                    <inputColumn
+                      refId="Package\Generate Error File\Flat File Destination.Inputs[Flat File Destination Input].Columns[CheckZip]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="10"
+                      cachedName="CheckZip"
+                      externalMetadataColumnId="Package\Generate Error File\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[CheckZip]"
+                      lineageId="Package\Generate Error File\OLE DB Source.Outputs[OLE DB Source Output].Columns[CheckZip]" />
+                    <inputColumn
+                      refId="Package\Generate Error File\Flat File Destination.Inputs[Flat File Destination Input].Columns[QLNotes]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="150"
+                      cachedName="QLNotes"
+                      externalMetadataColumnId="Package\Generate Error File\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[QLNotes]"
+                      lineageId="Package\Generate Error File\OLE DB Source.Outputs[OLE DB Source Output].Columns[QLNotes]" />
+                    <inputColumn
+                      refId="Package\Generate Error File\Flat File Destination.Inputs[Flat File Destination Input].Columns[RecordCreateDate]"
+                      cachedDataType="wstr"
+                      cachedLength="10"
+                      cachedName="RecordCreateDate"
+                      externalMetadataColumnId="Package\Generate Error File\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[RecordCreateDate]"
+                      lineageId="Package\Generate Error File\OLE DB Source.Outputs[OLE DB Source Output].Columns[RecordCreateDate]" />
+                    <inputColumn
+                      refId="Package\Generate Error File\Flat File Destination.Inputs[Flat File Destination Input].Columns[EnrSeq]"
+                      cachedDataType="i4"
+                      cachedName="EnrSeq"
+                      externalMetadataColumnId="Package\Generate Error File\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[EnrSeq]"
+                      lineageId="Package\Generate Error File\OLE DB Source.Outputs[OLE DB Source Output].Columns[EnrSeq]" />
+                    <inputColumn
+                      refId="Package\Generate Error File\Flat File Destination.Inputs[Flat File Destination Input].Columns[DepCode]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="1"
+                      cachedName="DepCode"
+                      externalMetadataColumnId="Package\Generate Error File\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[DepCode]"
+                      lineageId="Package\Generate Error File\OLE DB Source.Outputs[OLE DB Source Output].Columns[DepCode]" />
+                    <inputColumn
+                      refId="Package\Generate Error File\Flat File Destination.Inputs[Flat File Destination Input].Columns[Filename]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="255"
+                      cachedName="Filename"
+                      externalMetadataColumnId="Package\Generate Error File\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Filename]"
+                      lineageId="Package\Generate Error File\OLE DB Source.Outputs[OLE DB Source Output].Columns[Filename]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Generate Error File\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[ErrorDescription]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="ErrorDescription" />
+                    <externalMetadataColumn
+                      refId="Package\Generate Error File\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[CheckNumber]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="CheckNumber" />
+                    <externalMetadataColumn
+                      refId="Package\Generate Error File\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Payee]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="Payee" />
+                    <externalMetadataColumn
+                      refId="Package\Generate Error File\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[CheckDate]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="CheckDate" />
+                    <externalMetadataColumn
+                      refId="Package\Generate Error File\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[CheckAmount]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="CheckAmount" />
+                    <externalMetadataColumn
+                      refId="Package\Generate Error File\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[ClaimNumber]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="ClaimNumber" />
+                    <externalMetadataColumn
+                      refId="Package\Generate Error File\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[CheckAddress1]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="CheckAddress1" />
+                    <externalMetadataColumn
+                      refId="Package\Generate Error File\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[CheckAddress2]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="CheckAddress2" />
+                    <externalMetadataColumn
+                      refId="Package\Generate Error File\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[CheckCity]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="CheckCity" />
+                    <externalMetadataColumn
+                      refId="Package\Generate Error File\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[CheckState]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="CheckState" />
+                    <externalMetadataColumn
+                      refId="Package\Generate Error File\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[CheckZip]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="CheckZip" />
+                    <externalMetadataColumn
+                      refId="Package\Generate Error File\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[QLNotes]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="QLNotes" />
+                    <externalMetadataColumn
+                      refId="Package\Generate Error File\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[RecordCreateDate]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="RecordCreateDate" />
+                    <externalMetadataColumn
+                      refId="Package\Generate Error File\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[EnrSeq]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="EnrSeq" />
+                    <externalMetadataColumn
+                      refId="Package\Generate Error File\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[DepCode]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="DepCode" />
+                    <externalMetadataColumn
+                      refId="Package\Generate Error File\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Filename]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="Filename" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+            </component>
+            <component
+              refId="Package\Generate Error File\OLE DB Source"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="OLE DB Source"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[Enr_Escheatment_prod1_ErrorRecords]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Generate Error File\OLE DB Source.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[acisql2012.ACIrobot]"
+                  connectionManagerRefId="Package.ConnectionManagers[acisql2012.ACIrobot]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Generate Error File\OLE DB Source.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Generate Error File\OLE DB Source.Outputs[OLE DB Source Output].Columns[ErrorDescription]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Generate Error File\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ErrorDescription]"
+                      length="500"
+                      lineageId="Package\Generate Error File\OLE DB Source.Outputs[OLE DB Source Output].Columns[ErrorDescription]"
+                      name="ErrorDescription"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Generate Error File\OLE DB Source.Outputs[OLE DB Source Output].Columns[CheckNumber]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Generate Error File\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[CheckNumber]"
+                      length="25"
+                      lineageId="Package\Generate Error File\OLE DB Source.Outputs[OLE DB Source Output].Columns[CheckNumber]"
+                      name="CheckNumber"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Generate Error File\OLE DB Source.Outputs[OLE DB Source Output].Columns[Payee]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Generate Error File\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Payee]"
+                      length="55"
+                      lineageId="Package\Generate Error File\OLE DB Source.Outputs[OLE DB Source Output].Columns[Payee]"
+                      name="Payee"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Generate Error File\OLE DB Source.Outputs[OLE DB Source Output].Columns[CheckDate]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Generate Error File\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[CheckDate]"
+                      length="15"
+                      lineageId="Package\Generate Error File\OLE DB Source.Outputs[OLE DB Source Output].Columns[CheckDate]"
+                      name="CheckDate"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Generate Error File\OLE DB Source.Outputs[OLE DB Source Output].Columns[CheckAmount]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Generate Error File\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[CheckAmount]"
+                      length="10"
+                      lineageId="Package\Generate Error File\OLE DB Source.Outputs[OLE DB Source Output].Columns[CheckAmount]"
+                      name="CheckAmount"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Generate Error File\OLE DB Source.Outputs[OLE DB Source Output].Columns[ClaimNumber]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Generate Error File\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ClaimNumber]"
+                      length="15"
+                      lineageId="Package\Generate Error File\OLE DB Source.Outputs[OLE DB Source Output].Columns[ClaimNumber]"
+                      name="ClaimNumber"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Generate Error File\OLE DB Source.Outputs[OLE DB Source Output].Columns[CheckAddress1]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Generate Error File\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[CheckAddress1]"
+                      length="55"
+                      lineageId="Package\Generate Error File\OLE DB Source.Outputs[OLE DB Source Output].Columns[CheckAddress1]"
+                      name="CheckAddress1"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Generate Error File\OLE DB Source.Outputs[OLE DB Source Output].Columns[CheckAddress2]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Generate Error File\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[CheckAddress2]"
+                      length="55"
+                      lineageId="Package\Generate Error File\OLE DB Source.Outputs[OLE DB Source Output].Columns[CheckAddress2]"
+                      name="CheckAddress2"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Generate Error File\OLE DB Source.Outputs[OLE DB Source Output].Columns[CheckCity]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Generate Error File\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[CheckCity]"
+                      length="50"
+                      lineageId="Package\Generate Error File\OLE DB Source.Outputs[OLE DB Source Output].Columns[CheckCity]"
+                      name="CheckCity"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Generate Error File\OLE DB Source.Outputs[OLE DB Source Output].Columns[CheckState]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Generate Error File\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[CheckState]"
+                      length="2"
+                      lineageId="Package\Generate Error File\OLE DB Source.Outputs[OLE DB Source Output].Columns[CheckState]"
+                      name="CheckState"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Generate Error File\OLE DB Source.Outputs[OLE DB Source Output].Columns[CheckZip]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Generate Error File\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[CheckZip]"
+                      length="10"
+                      lineageId="Package\Generate Error File\OLE DB Source.Outputs[OLE DB Source Output].Columns[CheckZip]"
+                      name="CheckZip"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Generate Error File\OLE DB Source.Outputs[OLE DB Source Output].Columns[QLNotes]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Generate Error File\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[QLNotes]"
+                      length="150"
+                      lineageId="Package\Generate Error File\OLE DB Source.Outputs[OLE DB Source Output].Columns[QLNotes]"
+                      name="QLNotes"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Generate Error File\OLE DB Source.Outputs[OLE DB Source Output].Columns[RecordCreateDate]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Generate Error File\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[RecordCreateDate]"
+                      length="10"
+                      lineageId="Package\Generate Error File\OLE DB Source.Outputs[OLE DB Source Output].Columns[RecordCreateDate]"
+                      name="RecordCreateDate"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Generate Error File\OLE DB Source.Outputs[OLE DB Source Output].Columns[EnrSeq]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Generate Error File\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[EnrSeq]"
+                      lineageId="Package\Generate Error File\OLE DB Source.Outputs[OLE DB Source Output].Columns[EnrSeq]"
+                      name="EnrSeq"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Generate Error File\OLE DB Source.Outputs[OLE DB Source Output].Columns[DepCode]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Generate Error File\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[DepCode]"
+                      length="1"
+                      lineageId="Package\Generate Error File\OLE DB Source.Outputs[OLE DB Source Output].Columns[DepCode]"
+                      name="DepCode"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Generate Error File\OLE DB Source.Outputs[OLE DB Source Output].Columns[Filename]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Generate Error File\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Filename]"
+                      length="255"
+                      lineageId="Package\Generate Error File\OLE DB Source.Outputs[OLE DB Source Output].Columns[Filename]"
+                      name="Filename"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Generate Error File\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ErrorDescription]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="ErrorDescription" />
+                    <externalMetadataColumn
+                      refId="Package\Generate Error File\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[CheckNumber]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      name="CheckNumber" />
+                    <externalMetadataColumn
+                      refId="Package\Generate Error File\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Payee]"
+                      codePage="1252"
+                      dataType="str"
+                      length="55"
+                      name="Payee" />
+                    <externalMetadataColumn
+                      refId="Package\Generate Error File\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[CheckDate]"
+                      codePage="1252"
+                      dataType="str"
+                      length="15"
+                      name="CheckDate" />
+                    <externalMetadataColumn
+                      refId="Package\Generate Error File\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[CheckAmount]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      name="CheckAmount" />
+                    <externalMetadataColumn
+                      refId="Package\Generate Error File\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ClaimNumber]"
+                      codePage="1252"
+                      dataType="str"
+                      length="15"
+                      name="ClaimNumber" />
+                    <externalMetadataColumn
+                      refId="Package\Generate Error File\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[CheckAddress1]"
+                      codePage="1252"
+                      dataType="str"
+                      length="55"
+                      name="CheckAddress1" />
+                    <externalMetadataColumn
+                      refId="Package\Generate Error File\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[CheckAddress2]"
+                      codePage="1252"
+                      dataType="str"
+                      length="55"
+                      name="CheckAddress2" />
+                    <externalMetadataColumn
+                      refId="Package\Generate Error File\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[CheckCity]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="CheckCity" />
+                    <externalMetadataColumn
+                      refId="Package\Generate Error File\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[CheckState]"
+                      codePage="1252"
+                      dataType="str"
+                      length="2"
+                      name="CheckState" />
+                    <externalMetadataColumn
+                      refId="Package\Generate Error File\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[CheckZip]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      name="CheckZip" />
+                    <externalMetadataColumn
+                      refId="Package\Generate Error File\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[QLNotes]"
+                      codePage="1252"
+                      dataType="str"
+                      length="150"
+                      name="QLNotes" />
+                    <externalMetadataColumn
+                      refId="Package\Generate Error File\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[RecordCreateDate]"
+                      dataType="wstr"
+                      length="10"
+                      name="RecordCreateDate" />
+                    <externalMetadataColumn
+                      refId="Package\Generate Error File\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[EnrSeq]"
+                      dataType="i4"
+                      name="EnrSeq" />
+                    <externalMetadataColumn
+                      refId="Package\Generate Error File\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[DepCode]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="DepCode" />
+                    <externalMetadataColumn
+                      refId="Package\Generate Error File\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Filename]"
+                      codePage="1252"
+                      dataType="str"
+                      length="255"
+                      name="Filename" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Generate Error File\OLE DB Source.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Generate Error File\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorDescription]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      lineageId="Package\Generate Error File\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorDescription]"
+                      name="ErrorDescription" />
+                    <outputColumn
+                      refId="Package\Generate Error File\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[CheckNumber]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      lineageId="Package\Generate Error File\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[CheckNumber]"
+                      name="CheckNumber" />
+                    <outputColumn
+                      refId="Package\Generate Error File\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Payee]"
+                      codePage="1252"
+                      dataType="str"
+                      length="55"
+                      lineageId="Package\Generate Error File\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Payee]"
+                      name="Payee" />
+                    <outputColumn
+                      refId="Package\Generate Error File\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[CheckDate]"
+                      codePage="1252"
+                      dataType="str"
+                      length="15"
+                      lineageId="Package\Generate Error File\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[CheckDate]"
+                      name="CheckDate" />
+                    <outputColumn
+                      refId="Package\Generate Error File\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[CheckAmount]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      lineageId="Package\Generate Error File\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[CheckAmount]"
+                      name="CheckAmount" />
+                    <outputColumn
+                      refId="Package\Generate Error File\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ClaimNumber]"
+                      codePage="1252"
+                      dataType="str"
+                      length="15"
+                      lineageId="Package\Generate Error File\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ClaimNumber]"
+                      name="ClaimNumber" />
+                    <outputColumn
+                      refId="Package\Generate Error File\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[CheckAddress1]"
+                      codePage="1252"
+                      dataType="str"
+                      length="55"
+                      lineageId="Package\Generate Error File\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[CheckAddress1]"
+                      name="CheckAddress1" />
+                    <outputColumn
+                      refId="Package\Generate Error File\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[CheckAddress2]"
+                      codePage="1252"
+                      dataType="str"
+                      length="55"
+                      lineageId="Package\Generate Error File\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[CheckAddress2]"
+                      name="CheckAddress2" />
+                    <outputColumn
+                      refId="Package\Generate Error File\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[CheckCity]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\Generate Error File\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[CheckCity]"
+                      name="CheckCity" />
+                    <outputColumn
+                      refId="Package\Generate Error File\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[CheckState]"
+                      codePage="1252"
+                      dataType="str"
+                      length="2"
+                      lineageId="Package\Generate Error File\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[CheckState]"
+                      name="CheckState" />
+                    <outputColumn
+                      refId="Package\Generate Error File\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[CheckZip]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      lineageId="Package\Generate Error File\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[CheckZip]"
+                      name="CheckZip" />
+                    <outputColumn
+                      refId="Package\Generate Error File\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[QLNotes]"
+                      codePage="1252"
+                      dataType="str"
+                      length="150"
+                      lineageId="Package\Generate Error File\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[QLNotes]"
+                      name="QLNotes" />
+                    <outputColumn
+                      refId="Package\Generate Error File\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[RecordCreateDate]"
+                      dataType="wstr"
+                      length="10"
+                      lineageId="Package\Generate Error File\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[RecordCreateDate]"
+                      name="RecordCreateDate" />
+                    <outputColumn
+                      refId="Package\Generate Error File\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[EnrSeq]"
+                      dataType="i4"
+                      lineageId="Package\Generate Error File\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[EnrSeq]"
+                      name="EnrSeq" />
+                    <outputColumn
+                      refId="Package\Generate Error File\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[DepCode]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      lineageId="Package\Generate Error File\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[DepCode]"
+                      name="DepCode" />
+                    <outputColumn
+                      refId="Package\Generate Error File\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Filename]"
+                      codePage="1252"
+                      dataType="str"
+                      length="255"
+                      lineageId="Package\Generate Error File\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Filename]"
+                      name="Filename" />
+                    <outputColumn
+                      refId="Package\Generate Error File\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Generate Error File\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Generate Error File\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Generate Error File\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Generate Error File.Paths[OLE DB Source Output]"
+              endId="Package\Generate Error File\Flat File Destination.Inputs[Flat File Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\Generate Error File\OLE DB Source.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
       </DTS:ObjectData>
     </DTS:Executable>
     <DTS:Executable
@@ -1190,7 +2126,8 @@ RIGHT("0" + (DT_STR,4,1252)DATEPART( "ss" , @[System::StartTime]   ), 2) + ".csv
                           lineageId="Package\Loop Previous Day Results\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[ProcessStatus]" />
                         <inputColumn
                           refId="Package\Loop Previous Day Results\Data Flow Task\Flat File Destination.Inputs[Flat File Destination Input].Columns[CreateDate]"
-                          cachedDataType="dbDate"
+                          cachedDataType="wstr"
+                          cachedLength="10"
                           cachedName="CreateDate"
                           externalMetadataColumnId="Package\Loop Previous Day Results\Data Flow Task\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[CreateDate]"
                           lineageId="Package\Loop Previous Day Results\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[CreateDate]" />
@@ -1533,10 +2470,11 @@ RIGHT("0" + (DT_STR,4,1252)DATEPART( "ss" , @[System::StartTime]   ), 2) + ".csv
                           truncationRowDisposition="FailComponent" />
                         <outputColumn
                           refId="Package\Loop Previous Day Results\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[CreateDate]"
-                          dataType="dbDate"
+                          dataType="wstr"
                           errorOrTruncationOperation="Conversion"
                           errorRowDisposition="FailComponent"
                           externalMetadataColumnId="Package\Loop Previous Day Results\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[CreateDate]"
+                          length="10"
                           lineageId="Package\Loop Previous Day Results\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[CreateDate]"
                           name="CreateDate"
                           truncationRowDisposition="FailComponent" />
@@ -1669,7 +2607,8 @@ RIGHT("0" + (DT_STR,4,1252)DATEPART( "ss" , @[System::StartTime]   ), 2) + ".csv
                           name="ProcessStatus" />
                         <externalMetadataColumn
                           refId="Package\Loop Previous Day Results\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[CreateDate]"
-                          dataType="dbDate"
+                          dataType="wstr"
+                          length="10"
                           name="CreateDate" />
                         <externalMetadataColumn
                           refId="Package\Loop Previous Day Results\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[OtherBatch_Type]"
@@ -1785,7 +2724,8 @@ RIGHT("0" + (DT_STR,4,1252)DATEPART( "ss" , @[System::StartTime]   ), 2) + ".csv
                           name="ProcessStatus" />
                         <outputColumn
                           refId="Package\Loop Previous Day Results\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[CreateDate]"
-                          dataType="dbDate"
+                          dataType="wstr"
+                          length="10"
                           lineageId="Package\Loop Previous Day Results\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[CreateDate]"
                           name="CreateDate" />
                         <outputColumn
@@ -2040,7 +2980,7 @@ RIGHT("0" + (DT_STR,4,1252)DATEPART( "ss" , @[System::StartTime]   ), 2) + ".csv
           DTS:ExecutableType="Microsoft.ExecuteSQLTask"
           DTS:LocaleID="-1"
           DTS:ObjectName="Dummy Task"
-          DTS:ThreadHint="0">
+          DTS:ThreadHint="1">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
@@ -3944,6 +4884,33 @@ RIGHT("0" + (DT_STR,4,1252)DATEPART( "ss" , @[System::StartTime]   ), 2) + ".csv
           </DTS:ObjectData>
         </DTS:Executable>
         <DTS:Executable
+          DTS:refId="Package\Read Each Excel File to Database\Set Error Variables Back to Initial Values"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{9D43933E-CC18-42B2-B176-2F21BA29F85F}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Set Error Variables Back to Initial Values"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{2483A934-3461-4BF4-B40E-60BD135A4A8F}"
+              SQLTask:SqlStatementSource="Select 0 As InvalidClaimNumbers,'' As ClaimNotExist,'' As DuplicateClaims"
+              SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ResultBinding
+                SQLTask:ResultName="InvalidClaimNumbers"
+                SQLTask:DtsVariableName="User::Error_InvalidClaimNumbers" />
+              <SQLTask:ResultBinding
+                SQLTask:ResultName="ClaimNotExist"
+                SQLTask:DtsVariableName="User::Error_ClaimNotExist" />
+              <SQLTask:ResultBinding
+                SQLTask:ResultName="DuplicateClaims"
+                SQLTask:DtsVariableName="User::Error_DuplicateClaims" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
           DTS:refId="Package\Read Each Excel File to Database\Update Filename"
           DTS:CreationName="Microsoft.ExecuteSQLTask"
           DTS:Description="Execute SQL Task"
@@ -3951,7 +4918,7 @@ RIGHT("0" + (DT_STR,4,1252)DATEPART( "ss" , @[System::StartTime]   ), 2) + ".csv
           DTS:ExecutableType="Microsoft.ExecuteSQLTask"
           DTS:LocaleID="-1"
           DTS:ObjectName="Update Filename"
-          DTS:ThreadHint="1">
+          DTS:ThreadHint="0">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
@@ -3982,12 +4949,20 @@ RIGHT("0" + (DT_STR,4,1252)DATEPART( "ss" , @[System::StartTime]   ), 2) + ".csv
           DTS:LogicalAnd="True"
           DTS:ObjectName="Constraint"
           DTS:To="Package\Read Each Excel File to Database\Update Filename" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Read Each Excel File to Database.PrecedenceConstraints[Constraint 1]"
+          DTS:CreationName=""
+          DTS:DTSID="{5C9FC188-37CA-4133-AE06-7DD176109831}"
+          DTS:From="Package\Read Each Excel File to Database\Update Filename"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 1"
+          DTS:To="Package\Read Each Excel File to Database\Set Error Variables Back to Initial Values" />
       </DTS:PrecedenceConstraints>
       <DTS:ForEachVariableMappings>
         <DTS:ForEachVariableMapping
           DTS:CreationName=""
-          DTS:DTSID="{F47E22DA-EC5C-4F3F-A5B4-C0DF71EDE861}"
-          DTS:ObjectName="{F47E22DA-EC5C-4F3F-A5B4-C0DF71EDE861}"
+          DTS:DTSID="{2EBD14E3-0D79-449B-BB62-96222B82F086}"
+          DTS:ObjectName="{2EBD14E3-0D79-449B-BB62-96222B82F086}"
           DTS:ValueIndex="0"
           DTS:VariableName="User::FileName" />
       </DTS:ForEachVariableMappings>
@@ -4048,7 +5023,7 @@ RIGHT("0" + (DT_STR,4,1252)DATEPART( "ss" , @[System::StartTime]   ), 2) + ".csv
       <DTS:PropertyExpression
         DTS:Name="DelayValidation">True</DTS:PropertyExpression>
       <DTS:PropertyExpression
-        DTS:Name="MessageSource">"Invalid Claim Numbers (Need to be in #####-# format): " +  @[User::Error_InvalidClaimNumbers] + 
+        DTS:Name="MessageSource">"File processing errors have occurred. Any valid records were procesed and error files can be found in the Errors subfolder.   Invalid Claim Numbers (Need to be in #####-# format): " +  @[User::Error_InvalidClaimNumbers] + 
 "Claims That Do Not Exist:" +  @[User::Error_ClaimNotExist] +
 "Duplicate Claims or Claim Already Processed:" +  @[User::Error_DuplicateClaims]</DTS:PropertyExpression>
       <DTS:ObjectData>
@@ -4059,7 +5034,34 @@ RIGHT("0" + (DT_STR,4,1252)DATEPART( "ss" , @[System::StartTime]   ), 2) + ".csv
           SendMailTask:CC="ahouse@acitpa.com"
           SendMailTask:Subject="Escheatment Processing Error"
           SendMailTask:Priority="High"
-          SendMailTask:MessageSource="Invalid Claim Numbers (Need to be in #####-# format): 0Claims That Do Not Exist:Duplicate Claims or Claim Already Processed:" xmlns:SendMailTask="www.microsoft.com/sqlserver/dts/tasks/sendmailtask" />
+          SendMailTask:MessageSource="File processing errors have occurred. Any valid records were procesed and error files can be found in the Errors subfolder.   Invalid Claim Numbers (Need to be in #####-# format): 0Claims That Do Not Exist:Duplicate Claims or Claim Already Processed:" xmlns:SendMailTask="www.microsoft.com/sqlserver/dts/tasks/sendmailtask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Set Error FileName"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{197CC12E-20AA-49A5-A25B-A7D4ED89D52B}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Set Error FileName"
+      DTS:ThreadHint="1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{2483A934-3461-4BF4-B40E-60BD135A4A8F}"
+          SQLTask:SqlStatementSource="Declare @ErrorFullFileName varchar(255)&#xA;Set @ErrorFullFileName = (Select '\\acifs2\shared\Escheatment\Errors\' + ? + '_Errors.csv')&#xA;&#xA;Select @ErrorFullFileName as ErrorFileName"
+          SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ResultBinding
+            SQLTask:ResultName="ErrorFullFileName"
+            SQLTask:DtsVariableName="User::ErrorFullFileName" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="0"
+            SQLTask:DtsVariableName="User::FileName"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="129"
+            SQLTask:ParameterSize="-1" />
+        </SQLTask:SqlTaskData>
       </DTS:ObjectData>
     </DTS:Executable>
     <DTS:Executable
@@ -4103,6 +5105,22 @@ RIGHT("0" + (DT_STR,4,1252)DATEPART( "ss" , @[System::StartTime]   ), 2) + ".csv
       DTS:ObjectName="Constraint 1"
       DTS:To="Package\Delete records older than 365 days" />
     <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 10]"
+      DTS:CreationName=""
+      DTS:DTSID="{79834B83-69FF-47AA-BE1E-585D7E4F6BB2}"
+      DTS:From="Package\Send Mail On Error"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 10"
+      DTS:To="Package\Set Error FileName" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 11]"
+      DTS:CreationName=""
+      DTS:DTSID="{FB4001A1-5649-4AFB-94D8-0D8D5F82087B}"
+      DTS:From="Package\Set Error FileName"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 11"
+      DTS:To="Package\Generate Error File" />
+    <DTS:PrecedenceConstraint
       DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
       DTS:CreationName=""
       DTS:DTSID="{CCCA1CE2-D60E-4933-B455-1BDBDF89A8B5}"
@@ -4132,8 +5150,6 @@ RIGHT("0" + (DT_STR,4,1252)DATEPART( "ss" , @[System::StartTime]   ), 2) + ".csv
       DTS:refId="Package.PrecedenceConstraints[Constraint 5]"
       DTS:CreationName=""
       DTS:DTSID="{47FE06D4-FE98-4EBB-B9F6-927DDCEC0D06}"
-      DTS:EvalOp="3"
-      DTS:Expression="@[User::Error_InvalidClaimNumbers] == &quot;0&quot; &amp;&amp;  @[User::Error_ClaimNotExist] == &quot;&quot; &amp;&amp;  @[User::Error_DuplicateClaims] == &quot;&quot;"
       DTS:From="Package\Insert Into Enr_Queue prod1"
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint 5"
@@ -4394,13 +5410,13 @@ RIGHT("0" + (DT_STR,4,1252)DATEPART( "ss" , @[System::StartTime]   ), 2) + ".csv
           Id="Package\Read Each Excel File to Database\Dummy Task"
           TopLeft="21,13" />
         <NodeLayout
-          Size="208,42"
-          Id="Package\Read Each Excel File to Database\Import Escheatment (XLS)"
-          TopLeft="198.5,21.5" />
-        <NodeLayout
           Size="210,42"
           Id="Package\Read Each Excel File to Database\Import Escheatment (CSV)"
           TopLeft="99,80" />
+        <NodeLayout
+          Size="208,42"
+          Id="Package\Read Each Excel File to Database\Import Escheatment (XLS)"
+          TopLeft="198.5,21.5" />
         <NodeLayout
           Size="163,42"
           Id="Package\Read Each Excel File to Database\Update Filename"
@@ -4427,11 +5443,49 @@ RIGHT("0" + (DT_STR,4,1252)DATEPART( "ss" , @[System::StartTime]   ), 2) + ".csv
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
+        <NodeLayout
+          Size="277,42"
+          Id="Package\Read Each Excel File to Database\Set Error Variables Back to Initial Values"
+          TopLeft="50,280" />
+        <EdgeLayout
+          Id="Package\Read Each Excel File to Database.PrecedenceConstraints[Constraint 1]"
+          TopLeft="204.5,241">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-16,39"
+              Start="0,0"
+              End="-16,31.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,15.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,15.5"
+                    Point2="0,19.5"
+                    Point3="-4,19.5" />
+                  <mssgle:LineSegment
+                    End="-12,19.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-12,19.5"
+                    Point2="-16,19.5"
+                    Point3="-16,23.5" />
+                  <mssgle:LineSegment
+                    End="-16,31.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
         <ContainerLayout
           HeaderHeight="43"
           IsExpanded="True"
-          PanelSize="443,304"
-          Size="443,347"
+          PanelSize="454,377"
+          Size="454,420"
           Id="Package\Read Each Excel File to Database"
           TopLeft="295,465" />
         <NodeLayout
@@ -4445,7 +5499,7 @@ RIGHT("0" + (DT_STR,4,1252)DATEPART( "ss" , @[System::StartTime]   ), 2) + ".csv
         <NodeLayout
           Size="173,42"
           Id="Package\Send Mail On Error"
-          TopLeft="1083,568" />
+          TopLeft="1038,485" />
         <NodeLayout
           Size="198,46"
           Id="Package\Truncate Stage Table and Set FileName to Empty"
@@ -4500,9 +5554,9 @@ RIGHT("0" + (DT_STR,4,1252)DATEPART( "ss" , @[System::StartTime]   ), 2) + ".csv
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="73,-9.5"
+              EndConnector="73,27"
               Start="0,0"
-              End="65.5,-9.5">
+              End="65.5,27">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
@@ -4511,15 +5565,15 @@ RIGHT("0" + (DT_STR,4,1252)DATEPART( "ss" , @[System::StartTime]   ), 2) + ".csv
                   <mssgle:CubicBezierSegment
                     Point1="32.5,0"
                     Point2="36.5,0"
-                    Point3="36.5,-4" />
+                    Point3="36.5,4" />
                   <mssgle:LineSegment
-                    End="36.5,-5.5" />
+                    End="36.5,23" />
                   <mssgle:CubicBezierSegment
-                    Point1="36.5,-5.5"
-                    Point2="36.5,-9.5"
-                    Point3="40.5,-9.5" />
+                    Point1="36.5,23"
+                    Point2="36.5,27"
+                    Point3="40.5,27" />
                   <mssgle:LineSegment
-                    End="65.5,-9.5" />
+                    End="65.5,27" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -4530,37 +5584,31 @@ RIGHT("0" + (DT_STR,4,1252)DATEPART( "ss" , @[System::StartTime]   ), 2) + ".csv
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 3]"
-          TopLeft="738,638.5">
+          TopLeft="749,675">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="24,-159.5"
+              EndConnector="74,-175"
               Start="0,0"
-              End="16.5,-159.5">
+              End="74,-167.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="8,0" />
+                    End="70,0" />
                   <mssgle:CubicBezierSegment
-                    Point1="8,0"
-                    Point2="12,0"
-                    Point3="12,-4" />
+                    Point1="70,0"
+                    Point2="74,0"
+                    Point3="74,-4" />
                   <mssgle:LineSegment
-                    End="12,-155.5" />
-                  <mssgle:CubicBezierSegment
-                    Point1="12,-155.5"
-                    Point2="12,-159.5"
-                    Point3="16,-159.5" />
-                  <mssgle:LineSegment
-                    End="16.5,-159.5" />
+                    End="74,-167.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <mssgm:EdgeLabel
-              BoundingBox="4,1,16,16"
+              BoundingBox="66,1,16,16"
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
@@ -4617,32 +5665,42 @@ RIGHT("0" + (DT_STR,4,1252)DATEPART( "ss" , @[System::StartTime]   ), 2) + ".csv
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="8.5,42,16,16"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 6]"
-          TopLeft="1004,592.5">
+          TopLeft="931.333333333333,575">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="79,0"
+              EndConnector="193.166666666667,-48"
               Start="0,0"
-              End="71.5,0">
+              End="193.166666666667,-40.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="71.5,0" />
+                    End="0,-15.4137291280149" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,-15.4137291280149"
+                    Point2="0,-19.4137291280149"
+                    Point3="4,-19.4137291280149" />
+                  <mssgle:LineSegment
+                    End="189.166666666667,-19.4137291280149" />
+                  <mssgle:CubicBezierSegment
+                    Point1="189.166666666667,-19.4137291280149"
+                    Point2="193.166666666667,-19.4137291280149"
+                    Point3="193.166666666667,-23.4137291280149" />
+                  <mssgle:LineSegment
+                    End="193.166666666667,-40.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <mssgm:EdgeLabel
-              BoundingBox="27.75,5,16,16"
+              BoundingBox="88.5833333333334,-14.4137291280149,16,16"
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
@@ -4748,6 +5806,82 @@ RIGHT("0" + (DT_STR,4,1252)DATEPART( "ss" , @[System::StartTime]   ), 2) + ".csv
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
+        <NodeLayout
+          Size="173,42"
+          Id="Package\Set Error FileName"
+          TopLeft="1075,584" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 10]"
+          TopLeft="1152,527">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="9.5,57"
+              Start="0,0"
+              End="9.5,49.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,19.1134020618557" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,19.1134020618557"
+                    Point2="0,23.1134020618557"
+                    Point3="4,23.1134020618557" />
+                  <mssgle:LineSegment
+                    End="5.5,23.1134020618557" />
+                  <mssgle:CubicBezierSegment
+                    Point1="5.5,23.1134020618557"
+                    Point2="9.5,23.1134020618557"
+                    Point3="9.5,27.1134020618557" />
+                  <mssgle:LineSegment
+                    End="9.5,49.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="173,42"
+          Id="Package\Generate Error File"
+          TopLeft="1105,656" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 11]"
+          TopLeft="1161.5,626">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="30,30"
+              Start="0,0"
+              End="30,22.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,11" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,11"
+                    Point2="0,15"
+                    Point3="4,15" />
+                  <mssgle:LineSegment
+                    End="26,15" />
+                  <mssgle:CubicBezierSegment
+                    Point1="26,15"
+                    Point2="30,15"
+                    Point3="30,19" />
+                  <mssgle:LineSegment
+                    End="30,22.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
       </GraphLayout>
     </LayoutInfo>
   </Package>
@@ -4812,116 +5946,10 @@ RIGHT("0" + (DT_STR,4,1252)DATEPART( "ss" , @[System::StartTime]   ), 2) + ".csv
     </Properties>
   </PipelineComponentMetadata>
   <TaskHost
-    design-time-name="Package\Read Each Excel File to Database\Import Escheatment (XLS)">
-    <LayoutInfo>
-      <GraphLayout
-        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
-        <NodeLayout
-          Size="177,42"
-          Id="Package\Read Each Excel File to Database\Import Escheatment (XLS)\OLE DB Destination"
-          TopLeft="143,279" />
-        <NodeLayout
-          Size="161,42"
-          Id="Package\Read Each Excel File to Database\Import Escheatment (XLS)\Data Conversion"
-          TopLeft="150,181" />
-        <NodeLayout
-          Size="144,42"
-          Id="Package\Read Each Excel File to Database\Import Escheatment (XLS)\Excel Source"
-          TopLeft="144,100" />
-        <EdgeLayout
-          Id="Package\Read Each Excel File to Database\Import Escheatment (XLS).Paths[Excel Source Output]"
-          TopLeft="216,142">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="14.5,39"
-              Start="0,0"
-              End="14.5,31.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,15.5" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,15.5"
-                    Point2="0,19.5"
-                    Point3="4,19.5" />
-                  <mssgle:LineSegment
-                    End="10.5,19.5" />
-                  <mssgle:CubicBezierSegment
-                    Point1="10.5,19.5"
-                    Point2="14.5,19.5"
-                    Point3="14.5,23.5" />
-                  <mssgle:LineSegment
-                    End="14.5,31.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Read Each Excel File to Database\Import Escheatment (XLS).Paths[Data Conversion Output]"
-          TopLeft="231,223">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,56"
-              Start="0,0"
-              End="0,48.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,48.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-      </GraphLayout>
-    </LayoutInfo>
-  </TaskHost>
-  <PipelineComponentMetadata
-    design-time-name="Package\Read Each Excel File to Database\Import Escheatment (XLS)\OLE DB Destination">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q2:string">Table</Value>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
-    design-time-name="Package\Read Each Excel File to Database\Import Escheatment (XLS)\Excel Source">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q2:string">Table</Value>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <TaskHost
     design-time-name="Package\Read Each Excel File to Database\Import Escheatment (CSV)">
     <LayoutInfo>
       <GraphLayout
         Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
-        <NodeLayout
-          Size="156,42"
-          Id="Package\Read Each Excel File to Database\Import Escheatment (CSV)\Flat File Source"
-          TopLeft="47,47" />
         <NodeLayout
           Size="159,42"
           Id="Package\Read Each Excel File to Database\Import Escheatment (CSV)\Conditional Split"
@@ -4930,6 +5958,10 @@ RIGHT("0" + (DT_STR,4,1252)DATEPART( "ss" , @[System::StartTime]   ), 2) + ".csv
           Size="177,42"
           Id="Package\Read Each Excel File to Database\Import Escheatment (CSV)\OLE DB Destination"
           TopLeft="345,232" />
+        <NodeLayout
+          Size="156,42"
+          Id="Package\Read Each Excel File to Database\Import Escheatment (CSV)\Flat File Source"
+          TopLeft="47,47" />
         <EdgeLayout
           Id="Package\Read Each Excel File to Database\Import Escheatment (CSV).Paths[Flat File Source Output]"
           TopLeft="125,89">
@@ -4961,7 +5993,9 @@ RIGHT("0" + (DT_STR,4,1252)DATEPART( "ss" , @[System::StartTime]   ), 2) + ".csv
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -5005,6 +6039,175 @@ RIGHT("0" + (DT_STR,4,1252)DATEPART( "ss" , @[System::StartTime]   ), 2) + ".csv
   </TaskHost>
   <PipelineComponentMetadata
     design-time-name="Package\Read Each Excel File to Database\Import Escheatment (CSV)\OLE DB Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\Read Each Excel File to Database\Import Escheatment (XLS)">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="177,42"
+          Id="Package\Read Each Excel File to Database\Import Escheatment (XLS)\OLE DB Destination"
+          TopLeft="143,279" />
+        <NodeLayout
+          Size="161,42"
+          Id="Package\Read Each Excel File to Database\Import Escheatment (XLS)\Data Conversion"
+          TopLeft="150,181" />
+        <NodeLayout
+          Size="144,42"
+          Id="Package\Read Each Excel File to Database\Import Escheatment (XLS)\Excel Source"
+          TopLeft="144,100" />
+        <EdgeLayout
+          Id="Package\Read Each Excel File to Database\Import Escheatment (XLS).Paths[Excel Source Output]"
+          TopLeft="216,142">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="14.5,39"
+              Start="0,0"
+              End="14.5,31.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,15.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,15.5"
+                    Point2="0,19.5"
+                    Point3="4,19.5" />
+                  <mssgle:LineSegment
+                    End="10.5,19.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="10.5,19.5"
+                    Point2="14.5,19.5"
+                    Point3="14.5,23.5" />
+                  <mssgle:LineSegment
+                    End="14.5,31.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Read Each Excel File to Database\Import Escheatment (XLS).Paths[Data Conversion Output]"
+          TopLeft="231,223">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,56"
+              Start="0,0"
+              End="0,48.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,48.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Read Each Excel File to Database\Import Escheatment (XLS)\OLE DB Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Read Each Excel File to Database\Import Escheatment (XLS)\Excel Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\Generate Error File">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="157,42"
+          Id="Package\Generate Error File\OLE DB Source"
+          TopLeft="144,142" />
+        <NodeLayout
+          Size="176,42"
+          Id="Package\Generate Error File\Flat File Destination"
+          TopLeft="260,248" />
+        <EdgeLayout
+          Id="Package\Generate Error File.Paths[OLE DB Source Output]"
+          TopLeft="222.5,184">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="125.5,64"
+              Start="0,0"
+              End="125.5,56.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,28" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,28"
+                    Point2="0,32"
+                    Point3="4,32" />
+                  <mssgle:LineSegment
+                    End="121.5,32" />
+                  <mssgle:CubicBezierSegment
+                    Point1="121.5,32"
+                    Point2="125.5,32"
+                    Point3="125.5,36" />
+                  <mssgle:LineSegment
+                    End="125.5,56.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Generate Error File\OLE DB Source">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
